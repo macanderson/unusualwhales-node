@@ -4,8 +4,8 @@
 /**
  * Types will get added to this namespace when you import one of the following:
  *
- *   import 'unusualwhales/shims/node'
- *   import 'unusualwhales/shims/web'
+ *   import 'unusualwhales-node/shims/node'
+ *   import 'unusualwhales-node/shims/web'
  *
  * Importing more than one will cause type and runtime errors.
  */

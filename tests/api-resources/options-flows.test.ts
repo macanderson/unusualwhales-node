@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 import { Response } from 'node-fetch';
 
 const client = new Unusualwhales({
