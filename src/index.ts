@@ -5,11 +5,17 @@ import * as Core from './core';
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
+import {
+  OptionsFlowListParams,
+  OptionsFlowListResponse,
+  OptionsFlowRetrieveParams,
+  OptionsFlowRetrieveResponse,
+  OptionsFlows,
+} from './resources/options-flows';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
 import { Etf, EtfListResponse } from './resources/etf/etf';
 import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
-import { Options } from './resources/options/options';
 import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
@@ -130,7 +136,7 @@ export class Unusualwhales extends Core.APIClient {
   institutions: API.Institutions = new API.Institutions(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
   etf: API.Etf = new API.Etf(this);
-  options: API.Options = new API.Options(this);
+  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -192,7 +198,7 @@ Unusualwhales.Congress = Congress;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Darkpool = Darkpool;
 Unusualwhales.Etf = Etf;
-Unusualwhales.Options = Options;
+Unusualwhales.OptionsFlows = OptionsFlows;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
@@ -207,7 +213,13 @@ export declare namespace Unusualwhales {
 
   export { Etf as Etf, type EtfListResponse as EtfListResponse };
 
-  export { Options as Options };
+  export {
+    OptionsFlows as OptionsFlows,
+    type OptionsFlowRetrieveResponse as OptionsFlowRetrieveResponse,
+    type OptionsFlowListResponse as OptionsFlowListResponse,
+    type OptionsFlowRetrieveParams as OptionsFlowRetrieveParams,
+    type OptionsFlowListParams as OptionsFlowListParams,
+  };
 }
 
 export default Unusualwhales;

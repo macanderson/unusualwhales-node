@@ -27,9 +27,9 @@ const client = new Unusualwhales({
 });
 
 async function main() {
-  const optionsFlow = await client.options.optionsFlows.retrieve('REPLACE_ME');
+  const stock = await client.stocks.retrieve('REPLACE_ME');
 
-  console.log(optionsFlow.data);
+  console.log(stock.price);
 }
 
 main();
@@ -48,8 +48,7 @@ const client = new Unusualwhales({
 });
 
 async function main() {
-  const optionsFlow: Unusualwhales.Options.OptionsFlowRetrieveResponse =
-    await client.options.optionsFlows.retrieve('REPLACE_ME');
+  const stock: Unusualwhales.StockRetrieveResponse = await client.stocks.retrieve('REPLACE_ME');
 }
 
 main();
@@ -66,7 +65,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const optionsFlow = await client.options.optionsFlows.retrieve('REPLACE_ME').catch(async (err) => {
+  const stock = await client.stocks.retrieve('REPLACE_ME').catch(async (err) => {
     if (err instanceof Unusualwhales.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -109,7 +108,7 @@ const client = new Unusualwhales({
 });
 
 // Or, configure per-request:
-await client.options.optionsFlows.retrieve('REPLACE_ME', {
+await client.stocks.retrieve('REPLACE_ME', {
   maxRetries: 5,
 });
 ```
@@ -126,7 +125,7 @@ const client = new Unusualwhales({
 });
 
 // Override per-request:
-await client.options.optionsFlows.retrieve('REPLACE_ME', {
+await client.stocks.retrieve('REPLACE_ME', {
   timeout: 5 * 1000,
 });
 ```
@@ -147,15 +146,13 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Unusualwhales();
 
-const response = await client.options.optionsFlows.retrieve('REPLACE_ME').asResponse();
+const response = await client.stocks.retrieve('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: optionsFlow, response: raw } = await client.options.optionsFlows
-  .retrieve('REPLACE_ME')
-  .withResponse();
+const { data: stock, response: raw } = await client.stocks.retrieve('REPLACE_ME').withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(optionsFlow.data);
+console.log(stock.price);
 ```
 
 ### Making custom/undocumented requests
@@ -259,7 +256,7 @@ const client = new Unusualwhales({
 });
 
 // Override per-request:
-await client.options.optionsFlows.retrieve('REPLACE_ME', {
+await client.stocks.retrieve('REPLACE_ME', {
   httpAgent: new http.Agent({ keepAlive: false }),
 });
 ```
