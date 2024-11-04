@@ -5,21 +5,17 @@ import * as Core from './core';
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
-import { News, NewsListParams, NewsListResponse } from './resources/news';
+import { Congress } from './resources/congress/congress';
+import { Darkpool } from './resources/darkpool/darkpool';
+import { Etf, EtfListResponse } from './resources/etf/etf';
+import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
 import {
   OptionsFlowListParams,
   OptionsFlowListResponse,
   OptionsFlowRetrieveParams,
   OptionsFlowRetrieveResponse,
   OptionsFlows,
-} from './resources/options-flows';
-import { Analyst } from './resources/analyst/analyst';
-import { Congress } from './resources/congress/congress';
-import { Darkpool } from './resources/darkpool/darkpool';
-import { Etf, EtfListResponse } from './resources/etf/etf';
-import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
-import { Market } from './resources/market/market';
-import { Options } from './resources/options/options';
+} from './resources/options-flows/options-flows';
 import { Seasonality } from './resources/seasonality/seasonality';
 import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
 
@@ -136,17 +132,13 @@ export class Unusualwhales extends Core.APIClient {
     this.apiKey = apiKey;
   }
 
-  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
   stocks: API.Stocks = new API.Stocks(this);
-  news: API.News = new API.News(this);
   congress: API.Congress = new API.Congress(this);
   institutions: API.Institutions = new API.Institutions(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
   etf: API.Etf = new API.Etf(this);
-  options: API.Options = new API.Options(this);
+  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
   seasonality: API.Seasonality = new API.Seasonality(this);
-  analyst: API.Analyst = new API.Analyst(this);
-  market: API.Market = new API.Market(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -203,32 +195,18 @@ export {
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-Unusualwhales.OptionsFlows = OptionsFlows;
 Unusualwhales.Stocks = Stocks;
-Unusualwhales.News = News;
 Unusualwhales.Congress = Congress;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Darkpool = Darkpool;
 Unusualwhales.Etf = Etf;
-Unusualwhales.Options = Options;
+Unusualwhales.OptionsFlows = OptionsFlows;
 Unusualwhales.Seasonality = Seasonality;
-Unusualwhales.Analyst = Analyst;
-Unusualwhales.Market = Market;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
 
-  export {
-    OptionsFlows as OptionsFlows,
-    type OptionsFlowRetrieveResponse as OptionsFlowRetrieveResponse,
-    type OptionsFlowListResponse as OptionsFlowListResponse,
-    type OptionsFlowRetrieveParams as OptionsFlowRetrieveParams,
-    type OptionsFlowListParams as OptionsFlowListParams,
-  };
-
   export { Stocks as Stocks, type StockRetrieveResponse as StockRetrieveResponse };
-
-  export { News as News, type NewsListResponse as NewsListResponse, type NewsListParams as NewsListParams };
 
   export { Congress as Congress };
 
@@ -238,13 +216,15 @@ export declare namespace Unusualwhales {
 
   export { Etf as Etf, type EtfListResponse as EtfListResponse };
 
-  export { Options as Options };
+  export {
+    OptionsFlows as OptionsFlows,
+    type OptionsFlowRetrieveResponse as OptionsFlowRetrieveResponse,
+    type OptionsFlowListResponse as OptionsFlowListResponse,
+    type OptionsFlowRetrieveParams as OptionsFlowRetrieveParams,
+    type OptionsFlowListParams as OptionsFlowListParams,
+  };
 
   export { Seasonality as Seasonality };
-
-  export { Analyst as Analyst };
-
-  export { Market as Market };
 }
 
 export default Unusualwhales;

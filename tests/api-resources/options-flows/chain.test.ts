@@ -8,9 +8,9 @@ const client = new Unusualwhales({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource greeks', () => {
+describe('resource chain', () => {
   test('retrieve', async () => {
-    const responsePromise = client.options.greeks.retrieve('symbol');
+    const responsePromise = client.optionsFlows.chain.retrieve('symbol');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,16 +23,16 @@ describe('resource greeks', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.options.greeks.retrieve('symbol', { path: '/_stainless_unknown_path' }),
+      client.optionsFlows.chain.retrieve('symbol', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
   test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.options.greeks.retrieve(
+      client.optionsFlows.chain.retrieve(
         'symbol',
-        { expiration: '2019-12-27', optionType: 'CALL', strike: 0 },
+        { expiration: '2019-12-27' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
