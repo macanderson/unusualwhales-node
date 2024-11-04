@@ -13,7 +13,11 @@ import {
   OptionsFlowRetrieveResponse,
   OptionsFlows,
 } from './resources/options-flows';
-import { StockRetrieveResponse, Stocks } from './resources/stocks';
+import { Congress } from './resources/congress/congress';
+import { Darkpool } from './resources/darkpool/darkpool';
+import { Etf, EtfListResponse } from './resources/etf/etf';
+import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
+import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
   /**
@@ -131,6 +135,10 @@ export class Unusualwhales extends Core.APIClient {
   optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
   stocks: API.Stocks = new API.Stocks(this);
   news: API.News = new API.News(this);
+  congress: API.Congress = new API.Congress(this);
+  institutions: API.Institutions = new API.Institutions(this);
+  darkpool: API.Darkpool = new API.Darkpool(this);
+  etf: API.Etf = new API.Etf(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -190,6 +198,10 @@ export import fileFromPath = Uploads.fileFromPath;
 Unusualwhales.OptionsFlows = OptionsFlows;
 Unusualwhales.Stocks = Stocks;
 Unusualwhales.News = News;
+Unusualwhales.Congress = Congress;
+Unusualwhales.Institutions = Institutions;
+Unusualwhales.Darkpool = Darkpool;
+Unusualwhales.Etf = Etf;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
@@ -205,6 +217,14 @@ export declare namespace Unusualwhales {
   export { Stocks as Stocks, type StockRetrieveResponse as StockRetrieveResponse };
 
   export { News as News, type NewsListResponse as NewsListResponse, type NewsListParams as NewsListParams };
+
+  export { Congress as Congress };
+
+  export { Institutions as Institutions, type InstitutionListResponse as InstitutionListResponse };
+
+  export { Darkpool as Darkpool };
+
+  export { Etf as Etf, type EtfListResponse as EtfListResponse };
 }
 
 export default Unusualwhales;
