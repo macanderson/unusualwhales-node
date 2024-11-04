@@ -1,6 +1,6 @@
 # Unusualwhales Node API Library
 
-[![NPM version](https://img.shields.io/npm/v/unusualwhales.svg)](https://npmjs.org/package/unusualwhales) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/unusualwhales)
+[![NPM version](https://img.shields.io/npm/v/unusualwhales-node.svg)](https://npmjs.org/package/unusualwhales-node) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/unusualwhales-node)
 
 This library provides convenient access to the Unusualwhales REST API from server-side TypeScript or JavaScript.
 
@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/unusualwhales-node.git
+npm install unusualwhales-node
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://app.stainlessapi.com/docs/guides/publish), this will become: `npm install unusualwhales`
 
 ## Usage
 
@@ -23,7 +20,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 
 const client = new Unusualwhales({
   apiKey: process.env['API_KEY'], // This is the default and can be omitted
@@ -44,7 +41,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 
 const client = new Unusualwhales({
   apiKey: process.env['API_KEY'], // This is the default and can be omitted
@@ -215,12 +212,12 @@ add the following import before your first import `from "Unusualwhales"`:
 ```ts
 // Tell TypeScript and the package to use the global web fetch instead of node-fetch.
 // Note, despite the name, this does not add any polyfills, but expects them to be provided if needed.
-import 'unusualwhales/shims/web';
-import Unusualwhales from 'unusualwhales';
+import 'unusualwhales-node/shims/web';
+import Unusualwhales from 'unusualwhales-node';
 ```
 
-To do the inverse, add `import "unusualwhales/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/stainless-sdks/unusualwhales-node/tree/main/src/_shims#readme)).
+To do the inverse, add `import "unusualwhales-node/shims/node"` (which does import polyfills).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/macanderson/unusualwhales-node/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
 
@@ -229,7 +226,7 @@ which can be used to inspect or alter the `Request` or `Response` before/after e
 
 ```ts
 import { fetch } from 'undici'; // as one example
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 
 const client = new Unusualwhales({
   fetch: async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
@@ -276,7 +273,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/unusualwhales-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/macanderson/unusualwhales-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "unusualwhales/*": ["dist/src/*"],
-      "unusualwhales": ["dist/src/index.ts"],
+      "unusualwhales-node/*": ["dist/src/*"],
+      "unusualwhales-node": ["dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,

@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'unusualwhales/core';
-import { Blob } from 'unusualwhales/_shims/index';
-import { toFile } from 'unusualwhales';
+import { multipartFormRequestOptions, createForm } from 'unusualwhales-node/core';
+import { Blob } from 'unusualwhales-node/_shims/index';
+import { toFile } from 'unusualwhales-node';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

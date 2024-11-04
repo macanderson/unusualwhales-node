@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Unusualwhales from 'unusualwhales';
-import { APIUserAbortError } from 'unusualwhales';
-import { Headers } from 'unusualwhales/core';
+import Unusualwhales from 'unusualwhales-node';
+import { APIUserAbortError } from 'unusualwhales-node';
+import { Headers } from 'unusualwhales-node/core';
 import defaultFetch, { Response, type RequestInit, type RequestInfo } from 'node-fetch';
 
 describe('instantiate client', () => {

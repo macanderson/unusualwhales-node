@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'unusualwhales/core';
-import { Headers } from 'unusualwhales/_shims/index';
+import { createResponseHeaders } from 'unusualwhales-node/core';
+import { Headers } from 'unusualwhales-node/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters
