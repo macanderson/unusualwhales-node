@@ -8,9 +8,9 @@ const client = new Unusualwhales({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource ratings', () => {
+describe('resource historical', () => {
   test('retrieve', async () => {
-    const responsePromise = client.analyst.ratings.retrieve('symbol');
+    const responsePromise = client.optionsFlows.historical.retrieve('symbol');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,16 +23,22 @@ describe('resource ratings', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.analyst.ratings.retrieve('symbol', { path: '/_stainless_unknown_path' }),
+      client.optionsFlows.historical.retrieve('symbol', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
   test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.analyst.ratings.retrieve(
+      client.optionsFlows.historical.retrieve(
         'symbol',
-        { endDate: '2019-12-27', startDate: '2019-12-27' },
+        {
+          endDate: '2019-12-27',
+          expiration: '2019-12-27',
+          optionType: 'CALL',
+          startDate: '2019-12-27',
+          strike: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
