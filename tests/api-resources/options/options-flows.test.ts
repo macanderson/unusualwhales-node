@@ -10,7 +10,7 @@ const client = new Unusualwhales({
 
 describe('resource optionsFlows', () => {
   test('retrieve', async () => {
-    const responsePromise = client.optionsFlows.retrieve('symbol');
+    const responsePromise = client.options.optionsFlows.retrieve('symbol');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,19 +23,23 @@ describe('resource optionsFlows', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.retrieve('symbol', { path: '/_stainless_unknown_path' }),
+      client.options.optionsFlows.retrieve('symbol', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
   test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.retrieve('symbol', { date: '2019-12-27' }, { path: '/_stainless_unknown_path' }),
+      client.options.optionsFlows.retrieve(
+        'symbol',
+        { date: '2019-12-27' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
   test('list', async () => {
-    const responsePromise = client.optionsFlows.list();
+    const responsePromise = client.options.optionsFlows.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +51,7 @@ describe('resource optionsFlows', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.optionsFlows.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.options.optionsFlows.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
@@ -55,7 +59,7 @@ describe('resource optionsFlows', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.list(
+      client.options.optionsFlows.list(
         { date: '2019-12-27', symbol: 'symbol' },
         { path: '/_stainless_unknown_path' },
       ),
