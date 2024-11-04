@@ -106,16 +106,14 @@ Methods:
 
 - <code title="get /etf/holdings">client.etf.holdings.<a href="./src/resources/etf/holdings.ts">list</a>({ ...params }) -> HoldingListResponse</code>
 
-# Options
-
-## OptionsFlows
+# OptionsFlows
 
 Types:
 
-- <code><a href="./src/resources/options/options-flows.ts">OptionsFlowRetrieveResponse</a></code>
-- <code><a href="./src/resources/options/options-flows.ts">OptionsFlowListResponse</a></code>
+- <code><a href="./src/resources/options-flows.ts">OptionsFlowRetrieveResponse</a></code>
+- <code><a href="./src/resources/options-flows.ts">OptionsFlowListResponse</a></code>
 
 Methods:
 
-- <code title="get /options/flow/{symbol}">client.options.optionsFlows.<a href="./src/resources/options/options-flows.ts">retrieve</a>(symbol, { ...params }) -> OptionsFlowRetrieveResponse</code>
-- <code title="get /options/flow">client.options.optionsFlows.<a href="./src/resources/options/options-flows.ts">list</a>({ ...params }) -> OptionsFlowListResponse</code>
+- <code title="get /options/flow/{symbol}">client.optionsFlows.<a href="./src/resources/options-flows.ts">retrieve</a>(symbol, { ...params }) -> OptionsFlowRetrieveResponse</code>
+- <code title="get /options/flow">client.optionsFlows.<a href="./src/resources/options-flows.ts">list</a>({ ...params }) -> OptionsFlowListResponse</code>
