@@ -5,18 +5,11 @@ import * as Core from './core';
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
-import { News, NewsListParams, NewsListResponse } from './resources/news';
-import {
-  OptionsFlowListParams,
-  OptionsFlowListResponse,
-  OptionsFlowRetrieveParams,
-  OptionsFlowRetrieveResponse,
-  OptionsFlows,
-} from './resources/options-flows';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
 import { Etf, EtfListResponse } from './resources/etf/etf';
 import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
+import { Options } from './resources/options/options';
 import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
@@ -132,13 +125,12 @@ export class Unusualwhales extends Core.APIClient {
     this.apiKey = apiKey;
   }
 
-  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
   stocks: API.Stocks = new API.Stocks(this);
-  news: API.News = new API.News(this);
   congress: API.Congress = new API.Congress(this);
   institutions: API.Institutions = new API.Institutions(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
   etf: API.Etf = new API.Etf(this);
+  options: API.Options = new API.Options(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -195,28 +187,17 @@ export {
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-Unusualwhales.OptionsFlows = OptionsFlows;
 Unusualwhales.Stocks = Stocks;
-Unusualwhales.News = News;
 Unusualwhales.Congress = Congress;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Darkpool = Darkpool;
 Unusualwhales.Etf = Etf;
+Unusualwhales.Options = Options;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
 
-  export {
-    OptionsFlows as OptionsFlows,
-    type OptionsFlowRetrieveResponse as OptionsFlowRetrieveResponse,
-    type OptionsFlowListResponse as OptionsFlowListResponse,
-    type OptionsFlowRetrieveParams as OptionsFlowRetrieveParams,
-    type OptionsFlowListParams as OptionsFlowListParams,
-  };
-
   export { Stocks as Stocks, type StockRetrieveResponse as StockRetrieveResponse };
-
-  export { News as News, type NewsListResponse as NewsListResponse, type NewsListParams as NewsListParams };
 
   export { Congress as Congress };
 
@@ -225,6 +206,8 @@ export declare namespace Unusualwhales {
   export { Darkpool as Darkpool };
 
   export { Etf as Etf, type EtfListResponse as EtfListResponse };
+
+  export { Options as Options };
 }
 
 export default Unusualwhales;
