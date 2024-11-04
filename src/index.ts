@@ -13,10 +13,14 @@ import {
   OptionsFlowRetrieveResponse,
   OptionsFlows,
 } from './resources/options-flows';
+import { Analyst } from './resources/analyst/analyst';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
 import { Etf, EtfListResponse } from './resources/etf/etf';
 import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
+import { Market } from './resources/market/market';
+import { Options } from './resources/options/options';
+import { Seasonality } from './resources/seasonality/seasonality';
 import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
@@ -139,6 +143,10 @@ export class Unusualwhales extends Core.APIClient {
   institutions: API.Institutions = new API.Institutions(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
   etf: API.Etf = new API.Etf(this);
+  options: API.Options = new API.Options(this);
+  seasonality: API.Seasonality = new API.Seasonality(this);
+  analyst: API.Analyst = new API.Analyst(this);
+  market: API.Market = new API.Market(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -202,6 +210,10 @@ Unusualwhales.Congress = Congress;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Darkpool = Darkpool;
 Unusualwhales.Etf = Etf;
+Unusualwhales.Options = Options;
+Unusualwhales.Seasonality = Seasonality;
+Unusualwhales.Analyst = Analyst;
+Unusualwhales.Market = Market;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
@@ -225,6 +237,14 @@ export declare namespace Unusualwhales {
   export { Darkpool as Darkpool };
 
   export { Etf as Etf, type EtfListResponse as EtfListResponse };
+
+  export { Options as Options };
+
+  export { Seasonality as Seasonality };
+
+  export { Analyst as Analyst };
+
+  export { Market as Market };
 }
 
 export default Unusualwhales;
