@@ -5,6 +5,7 @@ import * as Core from './core';
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
+import { News, NewsListParams, NewsListResponse } from './resources/news';
 import {
   OptionsFlowListParams,
   OptionsFlowListResponse,
@@ -131,12 +132,13 @@ export class Unusualwhales extends Core.APIClient {
     this.apiKey = apiKey;
   }
 
+  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
   stocks: API.Stocks = new API.Stocks(this);
+  news: API.News = new API.News(this);
   congress: API.Congress = new API.Congress(this);
   institutions: API.Institutions = new API.Institutions(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
   etf: API.Etf = new API.Etf(this);
-  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -193,25 +195,16 @@ export {
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
+Unusualwhales.OptionsFlows = OptionsFlows;
 Unusualwhales.Stocks = Stocks;
+Unusualwhales.News = News;
 Unusualwhales.Congress = Congress;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Darkpool = Darkpool;
 Unusualwhales.Etf = Etf;
-Unusualwhales.OptionsFlows = OptionsFlows;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
-
-  export { Stocks as Stocks, type StockRetrieveResponse as StockRetrieveResponse };
-
-  export { Congress as Congress };
-
-  export { Institutions as Institutions, type InstitutionListResponse as InstitutionListResponse };
-
-  export { Darkpool as Darkpool };
-
-  export { Etf as Etf, type EtfListResponse as EtfListResponse };
 
   export {
     OptionsFlows as OptionsFlows,
@@ -220,6 +213,18 @@ export declare namespace Unusualwhales {
     type OptionsFlowRetrieveParams as OptionsFlowRetrieveParams,
     type OptionsFlowListParams as OptionsFlowListParams,
   };
+
+  export { Stocks as Stocks, type StockRetrieveResponse as StockRetrieveResponse };
+
+  export { News as News, type NewsListResponse as NewsListResponse, type NewsListParams as NewsListParams };
+
+  export { Congress as Congress };
+
+  export { Institutions as Institutions, type InstitutionListResponse as InstitutionListResponse };
+
+  export { Darkpool as Darkpool };
+
+  export { Etf as Etf, type EtfListResponse as EtfListResponse };
 }
 
 export default Unusualwhales;
