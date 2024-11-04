@@ -8,9 +8,9 @@ const client = new Unusualwhales({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource sectors', () => {
-  test('retrieve', async () => {
-    const responsePromise = client.market.sectors.retrieve();
+describe('resource news', () => {
+  test('list', async () => {
+    const responsePromise = client.stocks.news.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,17 +20,17 @@ describe('resource sectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('retrieve: request options instead of params are passed correctly', async () => {
+  test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.market.sectors.retrieve({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.stocks.news.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
 
-  test('retrieve: request options and params are passed correctly', async () => {
+  test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.market.sectors.retrieve({ timeFrame: 'daily' }, { path: '/_stainless_unknown_path' }),
+      client.stocks.news.list({ symbols: 'symbols' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 });
