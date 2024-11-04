@@ -42,12 +42,12 @@ export let isFsReadStream: Shims['isFsReadStream'] | undefined = undefined;
 export function setShims(shims: Shims, options: { auto: boolean } = { auto: false }) {
   if (auto) {
     throw new Error(
-      `you must \`import 'unusualwhales/shims/${shims.kind}'\` before importing anything else from unusualwhales`,
+      `you must \`import 'unusualwhales-node/shims/${shims.kind}'\` before importing anything else from unusualwhales-node`,
     );
   }
   if (kind) {
     throw new Error(
-      `can't \`import 'unusualwhales/shims/${shims.kind}'\` after \`import 'unusualwhales/shims/${kind}'\``,
+      `can't \`import 'unusualwhales-node/shims/${shims.kind}'\` after \`import 'unusualwhales-node/shims/${kind}'\``,
     );
   }
   auto = options.auto;
