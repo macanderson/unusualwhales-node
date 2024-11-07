@@ -46,7 +46,7 @@ describe('resource screener', () => {
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
-  test('post', async () => {
+  test('post: only required params', async () => {
     const responsePromise = client.stocks.screener.post({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -55,5 +55,9 @@ describe('resource screener', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('post: required and optional params', async () => {
+    const response = await client.stocks.screener.post({});
   });
 });

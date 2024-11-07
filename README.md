@@ -28,8 +28,6 @@ const client = new Unusualwhales({
 
 async function main() {
   const stock = await client.stocks.retrieve('REPLACE_ME');
-
-  console.log(stock.price);
 }
 
 main();
@@ -48,7 +46,7 @@ const client = new Unusualwhales({
 });
 
 async function main() {
-  const stock: Unusualwhales.StockRetrieveResponse = await client.stocks.retrieve('REPLACE_ME');
+  const stock: unknown = await client.stocks.retrieve('REPLACE_ME');
 }
 
 main();
@@ -152,7 +150,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: stock, response: raw } = await client.stocks.retrieve('REPLACE_ME').withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(stock.price);
+console.log(stock);
 ```
 
 ### Making custom/undocumented requests

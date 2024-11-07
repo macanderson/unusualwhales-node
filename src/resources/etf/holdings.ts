@@ -7,28 +7,12 @@ export class Holdings extends APIResource {
   /**
    * Retrieve holdings data for ETFs.
    */
-  list(query: HoldingListParams, options?: Core.RequestOptions): Core.APIPromise<HoldingListResponse> {
+  list(query: HoldingListParams, options?: Core.RequestOptions): Core.APIPromise<unknown> {
     return this._client.get('/etf/holdings', { query, ...options });
   }
 }
 
-export interface HoldingListResponse {
-  etf?: string;
-
-  holdings?: Array<HoldingListResponse.Holding>;
-}
-
-export namespace HoldingListResponse {
-  export interface Holding {
-    name?: string;
-
-    shares?: number;
-
-    symbol?: string;
-
-    weight?: number;
-  }
-}
+export type HoldingListResponse = unknown;
 
 export interface HoldingListParams {
   /**
