@@ -163,6 +163,10 @@ export class Unusualwhales extends Core.APIClient {
     };
   }
 
+  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
+    return { Authorization: this.apiKey };
+  }
+
   static Unusualwhales = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
