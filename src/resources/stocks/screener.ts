@@ -8,12 +8,12 @@ export class Screener extends APIResource {
   /**
    * Retrieve stocks that meet specified screening criteria.
    */
-  get(query?: ScreenerGetParams, options?: Core.RequestOptions): Core.APIPromise<unknown>;
-  get(options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  get(query?: ScreenerGetParams, options?: Core.RequestOptions): Core.APIPromise<ScreenerGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<ScreenerGetResponse>;
   get(
     query: ScreenerGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<ScreenerGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
@@ -23,14 +23,54 @@ export class Screener extends APIResource {
   /**
    * Retrieve stocks that meet specified screening criteria sent in the request body.
    */
-  post(body: ScreenerPostParams, options?: Core.RequestOptions): Core.APIPromise<unknown> {
+  post(body: ScreenerPostParams, options?: Core.RequestOptions): Core.APIPromise<ScreenerPostResponse> {
     return this._client.post('/stocks/screener', { body, ...options });
   }
 }
 
-export type ScreenerGetResponse = unknown;
+export interface ScreenerGetResponse {
+  data?: Array<ScreenerGetResponse.Data>;
+}
 
-export type ScreenerPostResponse = unknown;
+export namespace ScreenerGetResponse {
+  export interface Data {
+    companyName?: string;
+
+    industry?: string;
+
+    marketCap?: number;
+
+    price?: number;
+
+    sector?: string;
+
+    symbol?: string;
+
+    volume?: number;
+  }
+}
+
+export interface ScreenerPostResponse {
+  data?: Array<ScreenerPostResponse.Data>;
+}
+
+export namespace ScreenerPostResponse {
+  export interface Data {
+    companyName?: string;
+
+    industry?: string;
+
+    marketCap?: number;
+
+    price?: number;
+
+    sector?: string;
+
+    symbol?: string;
+
+    volume?: number;
+  }
+}
 
 export interface ScreenerGetParams {
   /**
@@ -74,7 +114,28 @@ export interface ScreenerGetParams {
   volumeMin?: number;
 }
 
-export type ScreenerPostParams = unknown;
+export interface ScreenerPostParams {
+  criteria?: Array<ScreenerPostParams.Criterion>;
+}
+
+export namespace ScreenerPostParams {
+  export interface Criterion {
+    /**
+     * The field to apply the criterion on.
+     */
+    field?: string;
+
+    /**
+     * The comparison operator.
+     */
+    operator?: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte' | 'in' | 'nin';
+
+    /**
+     * The value to compare the field against.
+     */
+    value?: string;
+  }
+}
 
 export declare namespace Screener {
   export {
