@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
-import * as Core from '../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as Core from '../../core';
 
 export class News extends APIResource {
   /**
-   * Retrieve the latest financial news.
+   * Retrieve the latest news affecting the overall market.
    */
   list(query?: NewsListParams, options?: Core.RequestOptions): Core.APIPromise<NewsListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<NewsListResponse>;
@@ -17,7 +17,7 @@ export class News extends APIResource {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.get('/news', { query, ...options });
+    return this._client.get('/market/news', { query, ...options });
   }
 }
 
@@ -39,9 +39,9 @@ export namespace NewsListResponse {
 
 export interface NewsListParams {
   /**
-   * Comma-separated list of stock symbols to filter news.
+   * Date to filter news articles.
    */
-  symbols?: string;
+  date?: string;
 }
 
 export declare namespace News {

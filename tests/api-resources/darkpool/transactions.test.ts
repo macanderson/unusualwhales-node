@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 import { Response } from 'node-fetch';
 
 const client = new Unusualwhales({
@@ -8,9 +8,9 @@ const client = new Unusualwhales({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource optionsFlows', () => {
+describe('resource transactions', () => {
   test('retrieve', async () => {
-    const responsePromise = client.optionsFlows.retrieve('symbol');
+    const responsePromise = client.darkpool.transactions.retrieve('symbol');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,19 +23,23 @@ describe('resource optionsFlows', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.retrieve('symbol', { path: '/_stainless_unknown_path' }),
+      client.darkpool.transactions.retrieve('symbol', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
   test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.retrieve('symbol', { date: '2019-12-27' }, { path: '/_stainless_unknown_path' }),
+      client.darkpool.transactions.retrieve(
+        'symbol',
+        { date: '2019-12-27' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
   test('list', async () => {
-    const responsePromise = client.optionsFlows.list();
+    const responsePromise = client.darkpool.transactions.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +51,7 @@ describe('resource optionsFlows', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.optionsFlows.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.darkpool.transactions.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
@@ -55,7 +59,7 @@ describe('resource optionsFlows', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.list(
+      client.darkpool.transactions.list(
         { date: '2019-12-27', symbol: 'symbol' },
         { path: '/_stainless_unknown_path' },
       ),

@@ -1,6 +1,6 @@
 # Unusualwhales Node API Library
 
-[![NPM version](https://img.shields.io/npm/v/unusualwhales.svg)](https://npmjs.org/package/unusualwhales) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/unusualwhales)
+[![NPM version](https://img.shields.io/npm/v/unusualwhales-node.svg)](https://npmjs.org/package/unusualwhales-node) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/unusualwhales-node)
 
 This library provides convenient access to the Unusualwhales REST API from server-side TypeScript or JavaScript.
 
@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/unusualwhales-node.git
+npm install unusualwhales-node
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://app.stainlessapi.com/docs/guides/publish), this will become: `npm install unusualwhales`
 
 ## Usage
 
@@ -23,16 +20,16 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 
 const client = new Unusualwhales({
   apiKey: process.env['API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const optionsFlow = await client.optionsFlows.retrieve('REPLACE_ME');
+  const stock = await client.stocks.retrieve('REPLACE_ME');
 
-  console.log(optionsFlow.data);
+  console.log(stock.price);
 }
 
 main();
@@ -44,16 +41,14 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 
 const client = new Unusualwhales({
   apiKey: process.env['API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const optionsFlow: Unusualwhales.OptionsFlowRetrieveResponse = await client.optionsFlows.retrieve(
-    'REPLACE_ME',
-  );
+  const stock: Unusualwhales.StockRetrieveResponse = await client.stocks.retrieve('REPLACE_ME');
 }
 
 main();
@@ -70,7 +65,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const optionsFlow = await client.optionsFlows.retrieve('REPLACE_ME').catch(async (err) => {
+  const stock = await client.stocks.retrieve('REPLACE_ME').catch(async (err) => {
     if (err instanceof Unusualwhales.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -113,7 +108,7 @@ const client = new Unusualwhales({
 });
 
 // Or, configure per-request:
-await client.optionsFlows.retrieve('REPLACE_ME', {
+await client.stocks.retrieve('REPLACE_ME', {
   maxRetries: 5,
 });
 ```
@@ -130,7 +125,7 @@ const client = new Unusualwhales({
 });
 
 // Override per-request:
-await client.optionsFlows.retrieve('REPLACE_ME', {
+await client.stocks.retrieve('REPLACE_ME', {
   timeout: 5 * 1000,
 });
 ```
@@ -151,13 +146,13 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Unusualwhales();
 
-const response = await client.optionsFlows.retrieve('REPLACE_ME').asResponse();
+const response = await client.stocks.retrieve('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: optionsFlow, response: raw } = await client.optionsFlows.retrieve('REPLACE_ME').withResponse();
+const { data: stock, response: raw } = await client.stocks.retrieve('REPLACE_ME').withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(optionsFlow.data);
+console.log(stock.price);
 ```
 
 ### Making custom/undocumented requests
@@ -215,12 +210,12 @@ add the following import before your first import `from "Unusualwhales"`:
 ```ts
 // Tell TypeScript and the package to use the global web fetch instead of node-fetch.
 // Note, despite the name, this does not add any polyfills, but expects them to be provided if needed.
-import 'unusualwhales/shims/web';
-import Unusualwhales from 'unusualwhales';
+import 'unusualwhales-node/shims/web';
+import Unusualwhales from 'unusualwhales-node';
 ```
 
-To do the inverse, add `import "unusualwhales/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/stainless-sdks/unusualwhales-node/tree/main/src/_shims#readme)).
+To do the inverse, add `import "unusualwhales-node/shims/node"` (which does import polyfills).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/macanderson/unusualwhales-node/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
 
@@ -229,7 +224,7 @@ which can be used to inspect or alter the `Request` or `Response` before/after e
 
 ```ts
 import { fetch } from 'undici'; // as one example
-import Unusualwhales from 'unusualwhales';
+import Unusualwhales from 'unusualwhales-node';
 
 const client = new Unusualwhales({
   fetch: async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
@@ -261,7 +256,7 @@ const client = new Unusualwhales({
 });
 
 // Override per-request:
-await client.optionsFlows.retrieve('REPLACE_ME', {
+await client.stocks.retrieve('REPLACE_ME', {
   httpAgent: new http.Agent({ keepAlive: false }),
 });
 ```
@@ -276,7 +271,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/unusualwhales-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/macanderson/unusualwhales-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
