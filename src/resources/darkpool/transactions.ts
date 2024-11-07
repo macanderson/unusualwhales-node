@@ -12,13 +12,13 @@ export class Transactions extends APIResource {
     symbol: string,
     query?: TransactionRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TransactionRetrieveResponse>;
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<TransactionRetrieveResponse>;
+  ): Core.APIPromise<unknown>;
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
   retrieve(
     symbol: string,
     query: TransactionRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TransactionRetrieveResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.retrieve(symbol, {}, query);
     }
@@ -28,15 +28,12 @@ export class Transactions extends APIResource {
   /**
    * Retrieve dark pool transactions data.
    */
-  list(
-    query?: TransactionListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TransactionListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<TransactionListResponse>;
+  list(query?: TransactionListParams, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  list(options?: Core.RequestOptions): Core.APIPromise<unknown>;
   list(
     query: TransactionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TransactionListResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -44,41 +41,9 @@ export class Transactions extends APIResource {
   }
 }
 
-export interface TransactionRetrieveResponse {
-  data?: Array<TransactionRetrieveResponse.Data>;
-}
+export type TransactionRetrieveResponse = unknown;
 
-export namespace TransactionRetrieveResponse {
-  export interface Data {
-    exchange?: string;
-
-    price?: number;
-
-    size?: number;
-
-    symbol?: string;
-
-    timestamp?: string;
-  }
-}
-
-export interface TransactionListResponse {
-  data?: Array<TransactionListResponse.Data>;
-}
-
-export namespace TransactionListResponse {
-  export interface Data {
-    exchange?: string;
-
-    price?: number;
-
-    size?: number;
-
-    symbol?: string;
-
-    timestamp?: string;
-  }
-}
+export type TransactionListResponse = unknown;
 
 export interface TransactionRetrieveParams {
   /**

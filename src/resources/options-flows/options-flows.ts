@@ -25,13 +25,13 @@ export class OptionsFlows extends APIResource {
     symbol: string,
     query?: OptionsFlowRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OptionsFlowRetrieveResponse>;
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<OptionsFlowRetrieveResponse>;
+  ): Core.APIPromise<unknown>;
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
   retrieve(
     symbol: string,
     query: OptionsFlowRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OptionsFlowRetrieveResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.retrieve(symbol, {}, query);
     }
@@ -41,15 +41,12 @@ export class OptionsFlows extends APIResource {
   /**
    * Retrieve options flow data.
    */
-  list(
-    query?: OptionsFlowListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OptionsFlowListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<OptionsFlowListResponse>;
+  list(query?: OptionsFlowListParams, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  list(options?: Core.RequestOptions): Core.APIPromise<unknown>;
   list(
     query: OptionsFlowListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OptionsFlowListResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -57,59 +54,25 @@ export class OptionsFlows extends APIResource {
   }
 }
 
-export interface OptionsFlowRetrieveResponse {
-  data?: Array<OptionsFlowRetrieveResponse.Data>;
-}
+export type OptionsFlowRetrieveResponse = unknown;
 
-export namespace OptionsFlowRetrieveResponse {
-  export interface Data {
-    expirationDate?: string;
-
-    openInterest?: number;
-
-    optionType?: 'CALL' | 'PUT';
-
-    premium?: number;
-
-    strikePrice?: number;
-
-    symbol?: string;
-
-    timestamp?: string;
-
-    volume?: number;
-  }
-}
-
-export interface OptionsFlowListResponse {
-  data?: Array<OptionsFlowListResponse.Data>;
-}
-
-export namespace OptionsFlowListResponse {
-  export interface Data {
-    expirationDate?: string;
-
-    openInterest?: number;
-
-    optionType?: 'CALL' | 'PUT';
-
-    premium?: number;
-
-    strikePrice?: number;
-
-    symbol?: string;
-
-    timestamp?: string;
-
-    volume?: number;
-  }
-}
+export type OptionsFlowListResponse = unknown;
 
 export interface OptionsFlowRetrieveParams {
   /**
    * Date to filter the options flow data.
    */
   date?: string;
+
+  /**
+   * Maximum premium to filter the options flow data.
+   */
+  maxPremium?: number;
+
+  /**
+   * Minimum premium to filter the options flow data.
+   */
+  minPremium?: number;
 }
 
 export interface OptionsFlowListParams {
@@ -117,6 +80,16 @@ export interface OptionsFlowListParams {
    * Date to filter the options flow data.
    */
   date?: string;
+
+  /**
+   * Maximum premium to filter the options flow data.
+   */
+  maxPremium?: number;
+
+  /**
+   * Minimum premium to filter the options flow data.
+   */
+  minPremium?: number;
 
   /**
    * Stock symbol to filter the options flow data.

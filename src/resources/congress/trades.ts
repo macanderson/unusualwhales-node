@@ -8,12 +8,12 @@ export class Trades extends APIResource {
   /**
    * Retrieve trading data reported by members of Congress.
    */
-  list(query?: TradeListParams, options?: Core.RequestOptions): Core.APIPromise<TradeListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<TradeListResponse>;
+  list(query?: TradeListParams, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  list(options?: Core.RequestOptions): Core.APIPromise<unknown>;
   list(
     query: TradeListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TradeListResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -21,25 +21,7 @@ export class Trades extends APIResource {
   }
 }
 
-export interface TradeListResponse {
-  trades?: Array<TradeListResponse.Trade>;
-}
-
-export namespace TradeListResponse {
-  export interface Trade {
-    amount?: string;
-
-    disclosureDate?: string;
-
-    member?: string;
-
-    symbol?: string;
-
-    transactionDate?: string;
-
-    transactionType?: 'Purchase' | 'Sale' | 'Exchange';
-  }
-}
+export type TradeListResponse = unknown;
 
 export interface TradeListParams {
   /**

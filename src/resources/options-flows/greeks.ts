@@ -12,13 +12,13 @@ export class Greeks extends APIResource {
     symbol: string,
     query?: GreekRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GreekRetrieveResponse>;
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<GreekRetrieveResponse>;
+  ): Core.APIPromise<unknown>;
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
   retrieve(
     symbol: string,
     query: GreekRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GreekRetrieveResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.retrieve(symbol, {}, query);
     }
@@ -26,33 +26,7 @@ export class Greeks extends APIResource {
   }
 }
 
-export interface GreekRetrieveResponse {
-  data?: Array<GreekRetrieveResponse.Data>;
-
-  symbol?: string;
-}
-
-export namespace GreekRetrieveResponse {
-  export interface Data {
-    delta?: number;
-
-    expirationDate?: string;
-
-    gamma?: number;
-
-    optionType?: 'CALL' | 'PUT';
-
-    rho?: number;
-
-    strikePrice?: number;
-
-    symbol?: string;
-
-    theta?: number;
-
-    vega?: number;
-  }
-}
+export type GreekRetrieveResponse = unknown;
 
 export interface GreekRetrieveParams {
   /**
