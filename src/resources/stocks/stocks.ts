@@ -20,18 +20,12 @@ export class Stocks extends APIResource {
   /**
    * Retrieve the current price for a stock symbol.
    */
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<StockRetrieveResponse> {
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown> {
     return this._client.get(`/stocks/price/${symbol}`, options);
   }
 }
 
-export interface StockRetrieveResponse {
-  price?: number;
-
-  symbol?: string;
-
-  timestamp?: string;
-}
+export type StockRetrieveResponse = unknown;
 
 Stocks.Screener = Screener;
 Stocks.News = News;

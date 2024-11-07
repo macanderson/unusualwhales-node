@@ -12,13 +12,13 @@ export class Stocks extends APIResource {
     symbol: string,
     query?: StockRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StockRetrieveResponse>;
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<StockRetrieveResponse>;
+  ): Core.APIPromise<unknown>;
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
   retrieve(
     symbol: string,
     query: StockRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<StockRetrieveResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.retrieve(symbol, {}, query);
     }
@@ -26,40 +26,7 @@ export class Stocks extends APIResource {
   }
 }
 
-export interface StockRetrieveResponse {
-  seasonalityData?: Array<StockRetrieveResponse.SeasonalityData>;
-
-  symbol?: string;
-
-  /**
-   * The time frame of the seasonality data.
-   */
-  timeFrame?: string;
-}
-
-export namespace StockRetrieveResponse {
-  export interface SeasonalityData {
-    /**
-     * Average return during the period.
-     */
-    averageReturn?: number;
-
-    /**
-     * The period identifier (e.g., month or week number).
-     */
-    period?: string;
-
-    /**
-     * Total number of periods analyzed.
-     */
-    totalPeriods?: number;
-
-    /**
-     * Percentage of times the stock had a positive return during the period.
-     */
-    winRate?: number;
-  }
-}
+export type StockRetrieveResponse = unknown;
 
 export interface StockRetrieveParams {
   /**

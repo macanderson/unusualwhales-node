@@ -8,12 +8,12 @@ export class News extends APIResource {
   /**
    * Retrieve the latest financial news.
    */
-  list(query?: NewsListParams, options?: Core.RequestOptions): Core.APIPromise<NewsListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<NewsListResponse>;
+  list(query?: NewsListParams, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  list(options?: Core.RequestOptions): Core.APIPromise<unknown>;
   list(
     query: NewsListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NewsListResponse> {
+  ): Core.APIPromise<unknown> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -21,23 +21,14 @@ export class News extends APIResource {
   }
 }
 
-export interface NewsListResponse {
-  articles?: Array<NewsListResponse.Article>;
-}
-
-export namespace NewsListResponse {
-  export interface Article {
-    publishedAt?: string;
-
-    source?: string;
-
-    title?: string;
-
-    url?: string;
-  }
-}
+export type NewsListResponse = unknown;
 
 export interface NewsListParams {
+  /**
+   * Date to filter news articles.
+   */
+  date?: string;
+
   /**
    * Comma-separated list of stock symbols to filter news.
    */

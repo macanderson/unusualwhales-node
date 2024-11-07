@@ -11,14 +11,12 @@ export class Institutions extends APIResource {
   /**
    * Retrieve a list of institutions that have reported trades.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<InstitutionListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<unknown> {
     return this._client.get('/institutions/list', options);
   }
 }
 
-export interface InstitutionListResponse {
-  institutions?: Array<string>;
-}
+export type InstitutionListResponse = unknown;
 
 Institutions.Trades = Trades;
 

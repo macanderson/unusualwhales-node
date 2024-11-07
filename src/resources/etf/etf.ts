@@ -11,14 +11,12 @@ export class Etf extends APIResource {
   /**
    * Retrieve a list of ETFs available.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<EtfListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<unknown> {
     return this._client.get('/etf/list', options);
   }
 }
 
-export interface EtfListResponse {
-  etfs?: Array<string>;
-}
+export type EtfListResponse = unknown;
 
 Etf.Holdings = Holdings;
 
