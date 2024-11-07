@@ -30,11 +30,7 @@ describe('resource optionsFlows', () => {
   test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.optionsFlows.retrieve(
-        'symbol',
-        { date: '2019-12-27', maxPremium: 0, minPremium: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.optionsFlows.retrieve('symbol', { date: '2019-12-27' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 
@@ -60,7 +56,7 @@ describe('resource optionsFlows', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.optionsFlows.list(
-        { date: '2019-12-27', maxPremium: 0, minPremium: 0, symbol: 'symbol' },
+        { date: '2019-12-27', symbol: 'symbol' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Unusualwhales.NotFoundError);

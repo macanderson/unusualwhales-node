@@ -7,12 +7,14 @@ export class Members extends APIResource {
   /**
    * Retrieve a list of Congress members who have reported trades.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<unknown> {
+  list(options?: Core.RequestOptions): Core.APIPromise<MemberListResponse> {
     return this._client.get('/congress/members', options);
   }
 }
 
-export type MemberListResponse = unknown;
+export interface MemberListResponse {
+  members?: Array<string>;
+}
 
 export declare namespace Members {
   export { type MemberListResponse as MemberListResponse };

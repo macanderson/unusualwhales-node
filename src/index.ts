@@ -5,10 +5,15 @@ import * as Core from './core';
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
+import { CorrelationListParams, CorrelationListResponse, Correlations } from './resources/correlations';
+import { InsiderTradeListParams, InsiderTradeListResponse, InsiderTrades } from './resources/insider-trades';
+import { Analyst } from './resources/analyst/analyst';
+import { Calendar } from './resources/calendar/calendar';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
 import { Etf, EtfListResponse } from './resources/etf/etf';
 import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
+import { Market } from './resources/market/market';
 import {
   OptionsFlowListParams,
   OptionsFlowListResponse,
@@ -17,6 +22,7 @@ import {
   OptionsFlows,
 } from './resources/options-flows/options-flows';
 import { Seasonality } from './resources/seasonality/seasonality';
+import { Spike } from './resources/spike/spike';
 import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
@@ -139,6 +145,12 @@ export class Unusualwhales extends Core.APIClient {
   etf: API.Etf = new API.Etf(this);
   optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
   seasonality: API.Seasonality = new API.Seasonality(this);
+  insiderTrades: API.InsiderTrades = new API.InsiderTrades(this);
+  spike: API.Spike = new API.Spike(this);
+  calendar: API.Calendar = new API.Calendar(this);
+  correlations: API.Correlations = new API.Correlations(this);
+  analyst: API.Analyst = new API.Analyst(this);
+  market: API.Market = new API.Market(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -202,6 +214,12 @@ Unusualwhales.Darkpool = Darkpool;
 Unusualwhales.Etf = Etf;
 Unusualwhales.OptionsFlows = OptionsFlows;
 Unusualwhales.Seasonality = Seasonality;
+Unusualwhales.InsiderTrades = InsiderTrades;
+Unusualwhales.Spike = Spike;
+Unusualwhales.Calendar = Calendar;
+Unusualwhales.Correlations = Correlations;
+Unusualwhales.Analyst = Analyst;
+Unusualwhales.Market = Market;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
@@ -225,6 +243,26 @@ export declare namespace Unusualwhales {
   };
 
   export { Seasonality as Seasonality };
+
+  export {
+    InsiderTrades as InsiderTrades,
+    type InsiderTradeListResponse as InsiderTradeListResponse,
+    type InsiderTradeListParams as InsiderTradeListParams,
+  };
+
+  export { Spike as Spike };
+
+  export { Calendar as Calendar };
+
+  export {
+    Correlations as Correlations,
+    type CorrelationListResponse as CorrelationListResponse,
+    type CorrelationListParams as CorrelationListParams,
+  };
+
+  export { Analyst as Analyst };
+
+  export { Market as Market };
 }
 
 export default Unusualwhales;

@@ -12,13 +12,13 @@ export class Historical extends APIResource {
     symbol: string,
     query?: HistoricalRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown>;
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  ): Core.APIPromise<HistoricalRetrieveResponse>;
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<HistoricalRetrieveResponse>;
   retrieve(
     symbol: string,
     query: HistoricalRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<HistoricalRetrieveResponse> {
     if (isRequestOptions(query)) {
       return this.retrieve(symbol, {}, query);
     }
@@ -26,7 +26,37 @@ export class Historical extends APIResource {
   }
 }
 
-export type HistoricalRetrieveResponse = unknown;
+export interface HistoricalRetrieveResponse {
+  data?: Array<HistoricalRetrieveResponse.Data>;
+
+  symbol?: string;
+}
+
+export namespace HistoricalRetrieveResponse {
+  export interface Data {
+    close?: number;
+
+    date?: string;
+
+    expirationDate?: string;
+
+    high?: number;
+
+    low?: number;
+
+    open?: number;
+
+    openInterest?: number;
+
+    optionType?: 'CALL' | 'PUT';
+
+    strikePrice?: number;
+
+    symbol?: string;
+
+    volume?: number;
+  }
+}
 
 export interface HistoricalRetrieveParams {
   /**
