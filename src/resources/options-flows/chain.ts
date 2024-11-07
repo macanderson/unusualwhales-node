@@ -12,13 +12,13 @@ export class Chain extends APIResource {
     symbol: string,
     query?: ChainRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown>;
-  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<unknown>;
+  ): Core.APIPromise<ChainRetrieveResponse>;
+  retrieve(symbol: string, options?: Core.RequestOptions): Core.APIPromise<ChainRetrieveResponse>;
   retrieve(
     symbol: string,
     query: ChainRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<ChainRetrieveResponse> {
     if (isRequestOptions(query)) {
       return this.retrieve(symbol, {}, query);
     }
@@ -26,7 +26,35 @@ export class Chain extends APIResource {
   }
 }
 
-export type ChainRetrieveResponse = unknown;
+export interface ChainRetrieveResponse {
+  expirationDate?: string;
+
+  options?: Array<ChainRetrieveResponse.Option>;
+
+  symbol?: string;
+}
+
+export namespace ChainRetrieveResponse {
+  export interface Option {
+    ask?: number;
+
+    bid?: number;
+
+    expirationDate?: string;
+
+    lastPrice?: number;
+
+    openInterest?: number;
+
+    optionType?: 'CALL' | 'PUT';
+
+    strikePrice?: number;
+
+    symbol?: string;
+
+    volume?: number;
+  }
+}
 
 export interface ChainRetrieveParams {
   /**

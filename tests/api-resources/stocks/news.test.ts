@@ -30,10 +30,7 @@ describe('resource news', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.stocks.news.list(
-        { date: '2019-12-27', symbols: 'symbols' },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.stocks.news.list({ symbols: 'symbols' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
   });
 });
