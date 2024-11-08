@@ -7,19 +7,19 @@ import * as TradesAPI from './trades';
 import { TradeListParams, TradeListResponse, Trades } from './trades';
 
 export class Congress extends APIResource {
-  trades: TradesAPI.Trades = new TradesAPI.Trades(this._client);
   members: MembersAPI.Members = new MembersAPI.Members(this._client);
+  trades: TradesAPI.Trades = new TradesAPI.Trades(this._client);
 }
 
-Congress.Trades = Trades;
 Congress.Members = Members;
+Congress.Trades = Trades;
 
 export declare namespace Congress {
+  export { Members as Members, type MemberListResponse as MemberListResponse };
+
   export {
     Trades as Trades,
     type TradeListResponse as TradeListResponse,
     type TradeListParams as TradeListParams,
   };
-
-  export { Members as Members, type MemberListResponse as MemberListResponse };
 }

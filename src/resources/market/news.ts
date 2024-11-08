@@ -8,24 +8,24 @@ export class News extends APIResource {
   /**
    * Retrieve the latest news affecting the overall market.
    */
-  list(query?: NewsListParams, options?: Core.RequestOptions): Core.APIPromise<NewsListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<NewsListResponse>;
-  list(
-    query: NewsListParams | Core.RequestOptions = {},
+  retrieve(query?: NewsRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<NewsRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<NewsRetrieveResponse>;
+  retrieve(
+    query: NewsRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NewsListResponse> {
+  ): Core.APIPromise<NewsRetrieveResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.retrieve({}, query);
     }
     return this._client.get('/market/news', { query, ...options });
   }
 }
 
-export interface NewsListResponse {
-  articles?: Array<NewsListResponse.Article>;
+export interface NewsRetrieveResponse {
+  articles?: Array<NewsRetrieveResponse.Article>;
 }
 
-export namespace NewsListResponse {
+export namespace NewsRetrieveResponse {
   export interface Article {
     publishedAt?: string;
 
@@ -37,7 +37,7 @@ export namespace NewsListResponse {
   }
 }
 
-export interface NewsListParams {
+export interface NewsRetrieveParams {
   /**
    * Date to filter news articles.
    */
@@ -45,5 +45,5 @@ export interface NewsListParams {
 }
 
 export declare namespace News {
-  export { type NewsListResponse as NewsListResponse, type NewsListParams as NewsListParams };
+  export { type NewsRetrieveResponse as NewsRetrieveResponse, type NewsRetrieveParams as NewsRetrieveParams };
 }

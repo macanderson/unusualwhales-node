@@ -8,24 +8,27 @@ export class Trades extends APIResource {
   /**
    * Retrieve trading data reported by institutions.
    */
-  list(query?: TradeListParams, options?: Core.RequestOptions): Core.APIPromise<TradeListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<TradeListResponse>;
-  list(
-    query: TradeListParams | Core.RequestOptions = {},
+  retrieve(
+    query?: TradeRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TradeListResponse> {
+  ): Core.APIPromise<TradeRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<TradeRetrieveResponse>;
+  retrieve(
+    query: TradeRetrieveParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TradeRetrieveResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.retrieve({}, query);
     }
     return this._client.get('/institutions/trades', { query, ...options });
   }
 }
 
-export interface TradeListResponse {
-  trades?: Array<TradeListResponse.Trade>;
+export interface TradeRetrieveResponse {
+  trades?: Array<TradeRetrieveResponse.Trade>;
 }
 
-export namespace TradeListResponse {
+export namespace TradeRetrieveResponse {
   export interface Trade {
     amount?: string;
 
@@ -41,7 +44,7 @@ export namespace TradeListResponse {
   }
 }
 
-export interface TradeListParams {
+export interface TradeRetrieveParams {
   /**
    * Date to filter trades.
    */
@@ -59,5 +62,8 @@ export interface TradeListParams {
 }
 
 export declare namespace Trades {
-  export { type TradeListResponse as TradeListResponse, type TradeListParams as TradeListParams };
+  export {
+    type TradeRetrieveResponse as TradeRetrieveResponse,
+    type TradeRetrieveParams as TradeRetrieveParams,
+  };
 }

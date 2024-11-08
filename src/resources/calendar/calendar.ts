@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as EconomicAPI from './economic';
-import { Economic, EconomicRetrieveParams, EconomicRetrieveResponse } from './economic';
+import { Economic, EconomicListParams, EconomicListResponse } from './economic';
 import * as FdaAPI from './fda';
-import { Fda, FdaRetrieveParams, FdaRetrieveResponse } from './fda';
+import { Fda, FdaListParams, FdaListResponse } from './fda';
 
 export class Calendar extends APIResource {
   economic: EconomicAPI.Economic = new EconomicAPI.Economic(this._client);
@@ -17,13 +17,9 @@ Calendar.Fda = Fda;
 export declare namespace Calendar {
   export {
     Economic as Economic,
-    type EconomicRetrieveResponse as EconomicRetrieveResponse,
-    type EconomicRetrieveParams as EconomicRetrieveParams,
+    type EconomicListResponse as EconomicListResponse,
+    type EconomicListParams as EconomicListParams,
   };
 
-  export {
-    Fda as Fda,
-    type FdaRetrieveResponse as FdaRetrieveResponse,
-    type FdaRetrieveParams as FdaRetrieveParams,
-  };
+  export { Fda as Fda, type FdaListResponse as FdaListResponse, type FdaListParams as FdaListParams };
 }

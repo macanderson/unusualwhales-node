@@ -8,24 +8,27 @@ export class Detection extends APIResource {
   /**
    * Retrieve data on detected spikes in trading activity.
    */
-  list(query?: DetectionListParams, options?: Core.RequestOptions): Core.APIPromise<DetectionListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<DetectionListResponse>;
-  list(
-    query: DetectionListParams | Core.RequestOptions = {},
+  retrieve(
+    query?: DetectionRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DetectionListResponse> {
+  ): Core.APIPromise<DetectionRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<DetectionRetrieveResponse>;
+  retrieve(
+    query: DetectionRetrieveParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DetectionRetrieveResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.retrieve({}, query);
     }
     return this._client.get('/spike/detection', { query, ...options });
   }
 }
 
-export interface DetectionListResponse {
-  spikes?: Array<DetectionListResponse.Spike>;
+export interface DetectionRetrieveResponse {
+  spikes?: Array<DetectionRetrieveResponse.Spike>;
 }
 
-export namespace DetectionListResponse {
+export namespace DetectionRetrieveResponse {
   export interface Spike {
     priceSpike?: number;
 
@@ -37,7 +40,7 @@ export namespace DetectionListResponse {
   }
 }
 
-export interface DetectionListParams {
+export interface DetectionRetrieveParams {
   /**
    * Date to filter spike data.
    */
@@ -56,7 +59,7 @@ export interface DetectionListParams {
 
 export declare namespace Detection {
   export {
-    type DetectionListResponse as DetectionListResponse,
-    type DetectionListParams as DetectionListParams,
+    type DetectionRetrieveResponse as DetectionRetrieveResponse,
+    type DetectionRetrieveParams as DetectionRetrieveParams,
   };
 }

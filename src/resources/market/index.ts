@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Indices, type IndexListResponse } from './indices';
+export { Indices, type IndexRetrieveResponse } from './indices';
 export { Market } from './market';
-export { Movers, type MoverListResponse, type MoverListParams } from './movers';
-export { News, type NewsListResponse, type NewsListParams } from './news';
+export { Movers, type MoverRetrieveResponse, type MoverRetrieveParams } from './movers';
+export { News, type NewsRetrieveResponse, type NewsRetrieveParams } from './news';
 export { Overview, type OverviewRetrieveResponse } from './overview';
-export { Sectors, type SectorListResponse, type SectorListParams } from './sectors';
+export { Sectors, type SectorRetrieveResponse, type SectorRetrieveParams } from './sectors';

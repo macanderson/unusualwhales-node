@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "unusualwhales-node/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "unusualwhales-node/*": ["src/*"],
-      "unusualwhales-node": ["src/index.ts"]
+      "unusualwhales/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "unusualwhales/*": ["src/*"],
+      "unusualwhales": ["src/index.ts"]
     },
     "noEmit": true,
 
