@@ -21,6 +21,7 @@ import {
   OptionsFlowRetrieveResponse,
   OptionsFlows,
 } from './resources/options-flows/options-flows';
+import { Options } from './resources/options/options';
 import { Seasonality } from './resources/seasonality/seasonality';
 import { Spike } from './resources/spike/spike';
 import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
@@ -151,6 +152,7 @@ export class Unusualwhales extends Core.APIClient {
   correlations: API.Correlations = new API.Correlations(this);
   analyst: API.Analyst = new API.Analyst(this);
   market: API.Market = new API.Market(this);
+  options: API.Options = new API.Options(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -220,6 +222,7 @@ Unusualwhales.Calendar = Calendar;
 Unusualwhales.Correlations = Correlations;
 Unusualwhales.Analyst = Analyst;
 Unusualwhales.Market = Market;
+Unusualwhales.Options = Options;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
@@ -263,6 +266,8 @@ export declare namespace Unusualwhales {
   export { Analyst as Analyst };
 
   export { Market as Market };
+
+  export { Options as Options };
 }
 
 export default Unusualwhales;

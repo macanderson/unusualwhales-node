@@ -7,8 +7,6 @@ import * as ChainAPI from './chain';
 import { Chain, ChainRetrieveParams, ChainRetrieveResponse } from './chain';
 import * as ContractAPI from './contract';
 import { Contract, ContractRetrieveResponse } from './contract';
-import * as ContractsAPI from './contracts';
-import { ContractListParams, ContractListResponse, Contracts } from './contracts';
 import * as ExpirationsAPI from './expirations';
 import { ExpirationRetrieveResponse, Expirations } from './expirations';
 import * as GreeksAPI from './greeks';
@@ -40,7 +38,6 @@ export class OptionsFlows extends APIResource {
   oiChange: OiChangeAPI.OiChange = new OiChangeAPI.OiChange(this._client);
   totalVolume: TotalVolumeAPI.TotalVolume = new TotalVolumeAPI.TotalVolume(this._client);
   contract: ContractAPI.Contract = new ContractAPI.Contract(this._client);
-  contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
 
   /**
    * Retrieve options flow data for a specific symbol.
@@ -157,7 +154,6 @@ OptionsFlows.GreeksFlowExpiry = GreeksFlowExpiry;
 OptionsFlows.OiChange = OiChange;
 OptionsFlows.TotalVolume = TotalVolume;
 OptionsFlows.Contract = Contract;
-OptionsFlows.Contracts = Contracts;
 
 export declare namespace OptionsFlows {
   export {
@@ -212,10 +208,4 @@ export declare namespace OptionsFlows {
   };
 
   export { Contract as Contract, type ContractRetrieveResponse as ContractRetrieveResponse };
-
-  export {
-    Contracts as Contracts,
-    type ContractListResponse as ContractListResponse,
-    type ContractListParams as ContractListParams,
-  };
 }

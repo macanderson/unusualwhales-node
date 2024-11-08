@@ -300,16 +300,6 @@ Methods:
 
 - <code title="get /options/contract/{optionSymbol}">client.optionsFlows.contract.<a href="./src/resources/options-flows/contract.ts">retrieve</a>(optionSymbol) -> ContractRetrieveResponse</code>
 
-## Contracts
-
-Types:
-
-- <code><a href="./src/resources/options-flows/contracts.ts">ContractListResponse</a></code>
-
-Methods:
-
-- <code title="get /options/contracts">client.optionsFlows.contracts.<a href="./src/resources/options-flows/contracts.ts">list</a>({ ...params }) -> ContractListResponse</code>
-
 # Seasonality
 
 ## Stocks
@@ -449,3 +439,15 @@ Types:
 Methods:
 
 - <code title="get /market/news">client.market.news.<a href="./src/resources/market/news.ts">list</a>({ ...params }) -> NewsListResponse</code>
+
+# Options
+
+## Contracts
+
+Types:
+
+- <code><a href="./src/resources/options/contracts.ts">ContractListResponse</a></code>
+
+Methods:
+
+- <code title="get /options/contracts">client.options.contracts.<a href="./src/resources/options/contracts.ts">list</a>({ ...params }) -> ContractListResponse</code>
