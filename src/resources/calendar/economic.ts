@@ -8,27 +8,24 @@ export class Economic extends APIResource {
   /**
    * Retrieve upcoming economic events and data releases.
    */
-  retrieve(
-    query?: EconomicRetrieveParams,
+  list(query?: EconomicListParams, options?: Core.RequestOptions): Core.APIPromise<EconomicListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<EconomicListResponse>;
+  list(
+    query: EconomicListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EconomicRetrieveResponse>;
-  retrieve(options?: Core.RequestOptions): Core.APIPromise<EconomicRetrieveResponse>;
-  retrieve(
-    query: EconomicRetrieveParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EconomicRetrieveResponse> {
+  ): Core.APIPromise<EconomicListResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve({}, query);
+      return this.list({}, query);
     }
     return this._client.get('/calendar/economic', { query, ...options });
   }
 }
 
-export interface EconomicRetrieveResponse {
-  events?: Array<EconomicRetrieveResponse.Event>;
+export interface EconomicListResponse {
+  events?: Array<EconomicListResponse.Event>;
 }
 
-export namespace EconomicRetrieveResponse {
+export namespace EconomicListResponse {
   export interface Event {
     actual?: string;
 
@@ -44,7 +41,7 @@ export namespace EconomicRetrieveResponse {
   }
 }
 
-export interface EconomicRetrieveParams {
+export interface EconomicListParams {
   /**
    * Country to filter events.
    */
@@ -62,8 +59,5 @@ export interface EconomicRetrieveParams {
 }
 
 export declare namespace Economic {
-  export {
-    type EconomicRetrieveResponse as EconomicRetrieveResponse,
-    type EconomicRetrieveParams as EconomicRetrieveParams,
-  };
+  export { type EconomicListResponse as EconomicListResponse, type EconomicListParams as EconomicListParams };
 }

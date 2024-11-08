@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Unusualwhales from 'unusualwhales-node';
-import { APIUserAbortError } from 'unusualwhales-node';
-import { Headers } from 'unusualwhales-node/core';
+import Unusualwhales from 'unusualwhales';
+import { APIUserAbortError } from 'unusualwhales';
+import { Headers } from 'unusualwhales/core';
 import defaultFetch, { Response, type RequestInit, type RequestInfo } from 'node-fetch';
 
 describe('instantiate client', () => {
@@ -178,14 +178,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['API_KEY'] = 'My API Key';
+    process.env['UNUSUALWHALES_API_KEY'] = 'My API Key';
     const client = new Unusualwhales();
     expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overriden environment variable arguments', () => {
     // set options via env var
-    process.env['API_KEY'] = 'another My API Key';
+    process.env['UNUSUALWHALES_API_KEY'] = 'another My API Key';
     const client = new Unusualwhales({ apiKey: 'My API Key' });
     expect(client.apiKey).toBe('My API Key');
   });

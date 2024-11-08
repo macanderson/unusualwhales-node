@@ -7,9 +7,9 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^unusualwhales-node$': '<rootDir>/src/index.ts',
-    '^unusualwhales-node/_shims/auto/(.*)$': '<rootDir>/src/_shims/auto/$1-node',
-    '^unusualwhales-node/(.*)$': '<rootDir>/src/$1',
+    '^unusualwhales$': '<rootDir>/src/index.ts',
+    '^unusualwhales/_shims/auto/(.*)$': '<rootDir>/src/_shims/auto/$1-node',
+    '^unusualwhales/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

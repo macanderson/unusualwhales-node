@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { toFile, type ResponseLike } from 'unusualwhales-node/uploads';
-import { File } from 'unusualwhales-node/_shims/index';
+import { toFile, type ResponseLike } from 'unusualwhales/uploads';
+import { File } from 'unusualwhales/_shims/index';
 
 class MyClass {
   name: string = 'foo';

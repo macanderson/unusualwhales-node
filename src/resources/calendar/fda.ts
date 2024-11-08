@@ -8,24 +8,24 @@ export class Fda extends APIResource {
   /**
    * Retrieve upcoming FDA approval dates and drug event data.
    */
-  retrieve(query?: FdaRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<FdaRetrieveResponse>;
-  retrieve(options?: Core.RequestOptions): Core.APIPromise<FdaRetrieveResponse>;
-  retrieve(
-    query: FdaRetrieveParams | Core.RequestOptions = {},
+  list(query?: FdaListParams, options?: Core.RequestOptions): Core.APIPromise<FdaListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<FdaListResponse>;
+  list(
+    query: FdaListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FdaRetrieveResponse> {
+  ): Core.APIPromise<FdaListResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve({}, query);
+      return this.list({}, query);
     }
     return this._client.get('/calendar/fda', { query, ...options });
   }
 }
 
-export interface FdaRetrieveResponse {
-  events?: Array<FdaRetrieveResponse.Event>;
+export interface FdaListResponse {
+  events?: Array<FdaListResponse.Event>;
 }
 
-export namespace FdaRetrieveResponse {
+export namespace FdaListResponse {
   export interface Event {
     date?: string;
 
@@ -39,7 +39,7 @@ export namespace FdaRetrieveResponse {
   }
 }
 
-export interface FdaRetrieveParams {
+export interface FdaListParams {
   /**
    * End date for the FDA calendar data.
    */
@@ -57,5 +57,5 @@ export interface FdaRetrieveParams {
 }
 
 export declare namespace Fda {
-  export { type FdaRetrieveResponse as FdaRetrieveResponse, type FdaRetrieveParams as FdaRetrieveParams };
+  export { type FdaListResponse as FdaListResponse, type FdaListParams as FdaListParams };
 }

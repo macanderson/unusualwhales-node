@@ -5,10 +5,58 @@ import * as Core from '../../core';
 
 export class Contracts extends APIResource {
   /**
+   * Retrieve detailed data for a specific option contract identified by its option
+   * symbol.
+   */
+  retrieve(optionSymbol: string, options?: Core.RequestOptions): Core.APIPromise<ContractRetrieveResponse> {
+    return this._client.get(`/options/contract/${optionSymbol}`, options);
+  }
+
+  /**
    * Retrieve a list of option contracts based on specified filters.
    */
   list(query: ContractListParams, options?: Core.RequestOptions): Core.APIPromise<ContractListResponse> {
     return this._client.get('/options/contracts', { query, ...options });
+  }
+}
+
+export interface ContractRetrieveResponse {
+  optionContract?: ContractRetrieveResponse.OptionContract;
+}
+
+export namespace ContractRetrieveResponse {
+  export interface OptionContract {
+    ask?: number;
+
+    bid?: number;
+
+    delta?: number;
+
+    expirationDate?: string;
+
+    gamma?: number;
+
+    impliedVolatility?: number;
+
+    lastPrice?: number;
+
+    openInterest?: number;
+
+    optionSymbol?: string;
+
+    optionType?: 'CALL' | 'PUT';
+
+    rho?: number;
+
+    strikePrice?: number;
+
+    symbol?: string;
+
+    theta?: number;
+
+    vega?: number;
+
+    volume?: number;
   }
 }
 
@@ -63,5 +111,9 @@ export interface ContractListParams {
 }
 
 export declare namespace Contracts {
-  export { type ContractListResponse as ContractListResponse, type ContractListParams as ContractListParams };
+  export {
+    type ContractRetrieveResponse as ContractRetrieveResponse,
+    type ContractListResponse as ContractListResponse,
+    type ContractListParams as ContractListParams,
+  };
 }

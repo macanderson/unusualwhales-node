@@ -6,29 +6,24 @@ import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
 import { CorrelationListParams, CorrelationListResponse, Correlations } from './resources/correlations';
-import { InsiderTradeListParams, InsiderTradeListResponse, InsiderTrades } from './resources/insider-trades';
+import { News, NewsRetrieveParams, NewsRetrieveResponse } from './resources/news';
 import { Analyst } from './resources/analyst/analyst';
 import { Calendar } from './resources/calendar/calendar';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
-import { Etf, EtfListResponse } from './resources/etf/etf';
+import { EtfListResponse, Etfs } from './resources/etfs/etfs';
+import { Insider } from './resources/insider/insider';
+import { Institutional } from './resources/institutional/institutional';
 import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
 import { Market } from './resources/market/market';
-import {
-  OptionsFlowListParams,
-  OptionsFlowListResponse,
-  OptionsFlowRetrieveParams,
-  OptionsFlowRetrieveResponse,
-  OptionsFlows,
-} from './resources/options-flows/options-flows';
 import { Options } from './resources/options/options';
 import { Seasonality } from './resources/seasonality/seasonality';
 import { Spike } from './resources/spike/spike';
-import { StockRetrieveResponse, Stocks } from './resources/stocks/stocks';
+import { Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
   /**
-   * Authorization header API Key
+   * Your authorization token for accessing the UnusualWhales API.
    */
   apiKey?: string | undefined;
 
@@ -100,7 +95,7 @@ export class Unusualwhales extends Core.APIClient {
   /**
    * API Client for interfacing with the Unusualwhales API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['UNUSUALWHALES_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['UNUSUALWHALES_BASE_URL'] ?? https://api.unusualwhales.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -111,12 +106,12 @@ export class Unusualwhales extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('UNUSUALWHALES_BASE_URL'),
-    apiKey = Core.readEnv('API_KEY'),
+    apiKey = Core.readEnv('UNUSUALWHALES_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.UnusualwhalesError(
-        "The API_KEY environment variable is missing or empty; either provide it, or instantiate the Unusualwhales client with an apiKey option, like new Unusualwhales({ apiKey: 'My API Key' }).",
+        "The UNUSUALWHALES_API_KEY environment variable is missing or empty; either provide it, or instantiate the Unusualwhales client with an apiKey option, like new Unusualwhales({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -139,20 +134,21 @@ export class Unusualwhales extends Core.APIClient {
     this.apiKey = apiKey;
   }
 
-  stocks: API.Stocks = new API.Stocks(this);
-  congress: API.Congress = new API.Congress(this);
-  institutions: API.Institutions = new API.Institutions(this);
-  darkpool: API.Darkpool = new API.Darkpool(this);
-  etf: API.Etf = new API.Etf(this);
-  optionsFlows: API.OptionsFlows = new API.OptionsFlows(this);
-  seasonality: API.Seasonality = new API.Seasonality(this);
-  insiderTrades: API.InsiderTrades = new API.InsiderTrades(this);
-  spike: API.Spike = new API.Spike(this);
-  calendar: API.Calendar = new API.Calendar(this);
-  correlations: API.Correlations = new API.Correlations(this);
   analyst: API.Analyst = new API.Analyst(this);
+  calendar: API.Calendar = new API.Calendar(this);
+  congress: API.Congress = new API.Congress(this);
+  correlations: API.Correlations = new API.Correlations(this);
+  darkpool: API.Darkpool = new API.Darkpool(this);
+  etfs: API.Etfs = new API.Etfs(this);
+  insider: API.Insider = new API.Insider(this);
+  institutional: API.Institutional = new API.Institutional(this);
+  institutions: API.Institutions = new API.Institutions(this);
   market: API.Market = new API.Market(this);
+  news: API.News = new API.News(this);
   options: API.Options = new API.Options(this);
+  seasonality: API.Seasonality = new API.Seasonality(this);
+  spike: API.Spike = new API.Spike(this);
+  stocks: API.Stocks = new API.Stocks(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -209,53 +205,30 @@ export {
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-Unusualwhales.Stocks = Stocks;
-Unusualwhales.Congress = Congress;
-Unusualwhales.Institutions = Institutions;
-Unusualwhales.Darkpool = Darkpool;
-Unusualwhales.Etf = Etf;
-Unusualwhales.OptionsFlows = OptionsFlows;
-Unusualwhales.Seasonality = Seasonality;
-Unusualwhales.InsiderTrades = InsiderTrades;
-Unusualwhales.Spike = Spike;
-Unusualwhales.Calendar = Calendar;
-Unusualwhales.Correlations = Correlations;
 Unusualwhales.Analyst = Analyst;
+Unusualwhales.Calendar = Calendar;
+Unusualwhales.Congress = Congress;
+Unusualwhales.Correlations = Correlations;
+Unusualwhales.Darkpool = Darkpool;
+Unusualwhales.Etfs = Etfs;
+Unusualwhales.Insider = Insider;
+Unusualwhales.Institutional = Institutional;
+Unusualwhales.Institutions = Institutions;
 Unusualwhales.Market = Market;
+Unusualwhales.News = News;
 Unusualwhales.Options = Options;
+Unusualwhales.Seasonality = Seasonality;
+Unusualwhales.Spike = Spike;
+Unusualwhales.Stocks = Stocks;
 
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
 
-  export { Stocks as Stocks, type StockRetrieveResponse as StockRetrieveResponse };
-
-  export { Congress as Congress };
-
-  export { Institutions as Institutions, type InstitutionListResponse as InstitutionListResponse };
-
-  export { Darkpool as Darkpool };
-
-  export { Etf as Etf, type EtfListResponse as EtfListResponse };
-
-  export {
-    OptionsFlows as OptionsFlows,
-    type OptionsFlowRetrieveResponse as OptionsFlowRetrieveResponse,
-    type OptionsFlowListResponse as OptionsFlowListResponse,
-    type OptionsFlowRetrieveParams as OptionsFlowRetrieveParams,
-    type OptionsFlowListParams as OptionsFlowListParams,
-  };
-
-  export { Seasonality as Seasonality };
-
-  export {
-    InsiderTrades as InsiderTrades,
-    type InsiderTradeListResponse as InsiderTradeListResponse,
-    type InsiderTradeListParams as InsiderTradeListParams,
-  };
-
-  export { Spike as Spike };
+  export { Analyst as Analyst };
 
   export { Calendar as Calendar };
+
+  export { Congress as Congress };
 
   export {
     Correlations as Correlations,
@@ -263,11 +236,31 @@ export declare namespace Unusualwhales {
     type CorrelationListParams as CorrelationListParams,
   };
 
-  export { Analyst as Analyst };
+  export { Darkpool as Darkpool };
+
+  export { Etfs as Etfs, type EtfListResponse as EtfListResponse };
+
+  export { Insider as Insider };
+
+  export { Institutional as Institutional };
+
+  export { Institutions as Institutions, type InstitutionListResponse as InstitutionListResponse };
 
   export { Market as Market };
 
+  export {
+    News as News,
+    type NewsRetrieveResponse as NewsRetrieveResponse,
+    type NewsRetrieveParams as NewsRetrieveParams,
+  };
+
   export { Options as Options };
+
+  export { Seasonality as Seasonality };
+
+  export { Spike as Spike };
+
+  export { Stocks as Stocks };
 }
 
 export default Unusualwhales;

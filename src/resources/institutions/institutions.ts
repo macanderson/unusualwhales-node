@@ -2,14 +2,11 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ActivityAPI from './activity';
-import { Activity, ActivityRetrieveParams, ActivityRetrieveResponse } from './activity';
 import * as TradesAPI from './trades';
-import { TradeListParams, TradeListResponse, Trades } from './trades';
+import { TradeRetrieveParams, TradeRetrieveResponse, Trades } from './trades';
 
 export class Institutions extends APIResource {
   trades: TradesAPI.Trades = new TradesAPI.Trades(this._client);
-  activity: ActivityAPI.Activity = new ActivityAPI.Activity(this._client);
 
   /**
    * Retrieve a list of institutions that have reported trades.
@@ -24,20 +21,13 @@ export interface InstitutionListResponse {
 }
 
 Institutions.Trades = Trades;
-Institutions.Activity = Activity;
 
 export declare namespace Institutions {
   export { type InstitutionListResponse as InstitutionListResponse };
 
   export {
     Trades as Trades,
-    type TradeListResponse as TradeListResponse,
-    type TradeListParams as TradeListParams,
-  };
-
-  export {
-    Activity as Activity,
-    type ActivityRetrieveResponse as ActivityRetrieveResponse,
-    type ActivityRetrieveParams as ActivityRetrieveParams,
+    type TradeRetrieveResponse as TradeRetrieveResponse,
+    type TradeRetrieveParams as TradeRetrieveParams,
   };
 }

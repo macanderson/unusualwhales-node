@@ -7,16 +7,16 @@ export class Indices extends APIResource {
   /**
    * Retrieve data on major market indices.
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<IndexListResponse> {
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<IndexRetrieveResponse> {
     return this._client.get('/market/indices', options);
   }
 }
 
-export interface IndexListResponse {
-  indices?: Array<IndexListResponse.Index>;
+export interface IndexRetrieveResponse {
+  indices?: Array<IndexRetrieveResponse.Index>;
 }
 
-export namespace IndexListResponse {
+export namespace IndexRetrieveResponse {
   export interface Index {
     change?: number;
 
@@ -31,5 +31,5 @@ export namespace IndexListResponse {
 }
 
 export declare namespace Indices {
-  export { type IndexListResponse as IndexListResponse };
+  export { type IndexRetrieveResponse as IndexRetrieveResponse };
 }

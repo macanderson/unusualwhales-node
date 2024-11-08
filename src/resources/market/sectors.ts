@@ -8,26 +8,29 @@ export class Sectors extends APIResource {
   /**
    * Retrieve performance data for market sectors.
    */
-  list(query?: SectorListParams, options?: Core.RequestOptions): Core.APIPromise<SectorListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SectorListResponse>;
-  list(
-    query: SectorListParams | Core.RequestOptions = {},
+  retrieve(
+    query?: SectorRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SectorListResponse> {
+  ): Core.APIPromise<SectorRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<SectorRetrieveResponse>;
+  retrieve(
+    query: SectorRetrieveParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SectorRetrieveResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.retrieve({}, query);
     }
     return this._client.get('/market/sectors', { query, ...options });
   }
 }
 
-export interface SectorListResponse {
-  sectors?: Array<SectorListResponse.Sector>;
+export interface SectorRetrieveResponse {
+  sectors?: Array<SectorRetrieveResponse.Sector>;
 
   timeFrame?: string;
 }
 
-export namespace SectorListResponse {
+export namespace SectorRetrieveResponse {
   export interface Sector {
     change?: number;
 
@@ -37,7 +40,7 @@ export namespace SectorListResponse {
   }
 }
 
-export interface SectorListParams {
+export interface SectorRetrieveParams {
   /**
    * Time frame for sector performance (e.g., 'daily', 'weekly').
    */
@@ -45,5 +48,8 @@ export interface SectorListParams {
 }
 
 export declare namespace Sectors {
-  export { type SectorListResponse as SectorListResponse, type SectorListParams as SectorListParams };
+  export {
+    type SectorRetrieveResponse as SectorRetrieveResponse,
+    type SectorRetrieveParams as SectorRetrieveParams,
+  };
 }

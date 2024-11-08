@@ -2,46 +2,50 @@
 
 import { APIResource } from '../../resource';
 import * as IndicesAPI from './indices';
-import { IndexListResponse, Indices } from './indices';
+import { IndexRetrieveResponse, Indices } from './indices';
 import * as MoversAPI from './movers';
-import { MoverListParams, MoverListResponse, Movers } from './movers';
+import { MoverRetrieveParams, MoverRetrieveResponse, Movers } from './movers';
 import * as NewsAPI from './news';
-import { News, NewsListParams, NewsListResponse } from './news';
+import { News, NewsRetrieveParams, NewsRetrieveResponse } from './news';
 import * as OverviewAPI from './overview';
 import { Overview, OverviewRetrieveResponse } from './overview';
 import * as SectorsAPI from './sectors';
-import { SectorListParams, SectorListResponse, Sectors } from './sectors';
+import { SectorRetrieveParams, SectorRetrieveResponse, Sectors } from './sectors';
 
 export class Market extends APIResource {
-  overview: OverviewAPI.Overview = new OverviewAPI.Overview(this._client);
   indices: IndicesAPI.Indices = new IndicesAPI.Indices(this._client);
   movers: MoversAPI.Movers = new MoversAPI.Movers(this._client);
-  sectors: SectorsAPI.Sectors = new SectorsAPI.Sectors(this._client);
   news: NewsAPI.News = new NewsAPI.News(this._client);
+  overview: OverviewAPI.Overview = new OverviewAPI.Overview(this._client);
+  sectors: SectorsAPI.Sectors = new SectorsAPI.Sectors(this._client);
 }
 
-Market.Overview = Overview;
 Market.Indices = Indices;
 Market.Movers = Movers;
-Market.Sectors = Sectors;
 Market.News = News;
+Market.Overview = Overview;
+Market.Sectors = Sectors;
 
 export declare namespace Market {
-  export { Overview as Overview, type OverviewRetrieveResponse as OverviewRetrieveResponse };
-
-  export { Indices as Indices, type IndexListResponse as IndexListResponse };
+  export { Indices as Indices, type IndexRetrieveResponse as IndexRetrieveResponse };
 
   export {
     Movers as Movers,
-    type MoverListResponse as MoverListResponse,
-    type MoverListParams as MoverListParams,
+    type MoverRetrieveResponse as MoverRetrieveResponse,
+    type MoverRetrieveParams as MoverRetrieveParams,
   };
 
   export {
-    Sectors as Sectors,
-    type SectorListResponse as SectorListResponse,
-    type SectorListParams as SectorListParams,
+    News as News,
+    type NewsRetrieveResponse as NewsRetrieveResponse,
+    type NewsRetrieveParams as NewsRetrieveParams,
   };
 
-  export { News as News, type NewsListResponse as NewsListResponse, type NewsListParams as NewsListParams };
+  export { Overview as Overview, type OverviewRetrieveResponse as OverviewRetrieveResponse };
+
+  export {
+    Sectors as Sectors,
+    type SectorRetrieveResponse as SectorRetrieveResponse,
+    type SectorRetrieveParams as SectorRetrieveParams,
+  };
 }

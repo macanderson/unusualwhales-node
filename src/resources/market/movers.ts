@@ -8,21 +8,24 @@ export class Movers extends APIResource {
   /**
    * Retrieve top gainers and losers in the market.
    */
-  list(query?: MoverListParams, options?: Core.RequestOptions): Core.APIPromise<MoverListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<MoverListResponse>;
-  list(
-    query: MoverListParams | Core.RequestOptions = {},
+  retrieve(
+    query?: MoverRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MoverListResponse> {
+  ): Core.APIPromise<MoverRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<MoverRetrieveResponse>;
+  retrieve(
+    query: MoverRetrieveParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MoverRetrieveResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.retrieve({}, query);
     }
     return this._client.get('/market/movers', { query, ...options });
   }
 }
 
-export interface MoverListResponse {
-  movers?: Array<MoverListResponse.Mover>;
+export interface MoverRetrieveResponse {
+  movers?: Array<MoverRetrieveResponse.Mover>;
 
   /**
    * gainers or losers
@@ -30,7 +33,7 @@ export interface MoverListResponse {
   type?: string;
 }
 
-export namespace MoverListResponse {
+export namespace MoverRetrieveResponse {
   export interface Mover {
     change?: number;
 
@@ -46,7 +49,7 @@ export namespace MoverListResponse {
   }
 }
 
-export interface MoverListParams {
+export interface MoverRetrieveParams {
   /**
    * Number of records to retrieve.
    */
@@ -59,5 +62,8 @@ export interface MoverListParams {
 }
 
 export declare namespace Movers {
-  export { type MoverListResponse as MoverListResponse, type MoverListParams as MoverListParams };
+  export {
+    type MoverRetrieveResponse as MoverRetrieveResponse,
+    type MoverRetrieveParams as MoverRetrieveParams,
+  };
 }

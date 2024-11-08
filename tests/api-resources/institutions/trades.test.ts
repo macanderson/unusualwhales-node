@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Unusualwhales from 'unusualwhales-node';
+import Unusualwhales from 'unusualwhales';
 import { Response } from 'node-fetch';
 
 const client = new Unusualwhales({
@@ -9,8 +9,8 @@ const client = new Unusualwhales({
 });
 
 describe('resource trades', () => {
-  test('list', async () => {
-    const responsePromise = client.institutions.trades.list();
+  test('retrieve', async () => {
+    const responsePromise = client.institutions.trades.retrieve();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,17 +20,17 @@ describe('resource trades', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.institutions.trades.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.institutions.trades.retrieve({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
 
-  test('list: request options and params are passed correctly', async () => {
+  test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.institutions.trades.list(
+      client.institutions.trades.retrieve(
         { date: '2019-12-27', institution: 'institution', symbol: 'symbol' },
         { path: '/_stainless_unknown_path' },
       ),

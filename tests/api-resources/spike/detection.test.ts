@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Unusualwhales from 'unusualwhales-node';
+import Unusualwhales from 'unusualwhales';
 import { Response } from 'node-fetch';
 
 const client = new Unusualwhales({
@@ -9,8 +9,8 @@ const client = new Unusualwhales({
 });
 
 describe('resource detection', () => {
-  test('list', async () => {
-    const responsePromise = client.spike.detection.list();
+  test('retrieve', async () => {
+    const responsePromise = client.spike.detection.retrieve();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,17 +20,17 @@ describe('resource detection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.spike.detection.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.spike.detection.retrieve({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
 
-  test('list: request options and params are passed correctly', async () => {
+  test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.spike.detection.list(
+      client.spike.detection.retrieve(
         { date: '2019-12-27', symbol: 'symbol', threshold: 0 },
         { path: '/_stainless_unknown_path' },
       ),

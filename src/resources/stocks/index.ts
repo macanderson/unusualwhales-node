@@ -5,13 +5,7 @@ export { Dividends, type DividendRetrieveResponse, type DividendRetrieveParams }
 export { Earnings, type EarningRetrieveResponse } from './earnings';
 export { Financials, type FinancialRetrieveResponse, type FinancialRetrieveParams } from './financials';
 export { Historical, type HistoricalRetrieveResponse, type HistoricalRetrieveParams } from './historical';
-export { News, type NewsListResponse, type NewsListParams } from './news';
+export { Price, type PriceRetrieveResponse } from './price';
 export { Quote, type QuoteRetrieveResponse } from './quote';
-export {
-  Screener,
-  type ScreenerGetResponse,
-  type ScreenerPostResponse,
-  type ScreenerGetParams,
-  type ScreenerPostParams,
-} from './screener';
-export { Stocks, type StockRetrieveResponse } from './stocks';
+export { Screener, type ScreenerListResponse, type ScreenerListParams } from './screener';
+export { Stocks } from './stocks';
