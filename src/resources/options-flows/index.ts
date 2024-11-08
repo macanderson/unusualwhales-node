@@ -2,7 +2,6 @@
 
 export { Chain, type ChainRetrieveResponse, type ChainRetrieveParams } from './chain';
 export { Contract, type ContractRetrieveResponse } from './contract';
-export { Contracts, type ContractListResponse, type ContractListParams } from './contracts';
 export { Expirations, type ExpirationRetrieveResponse } from './expirations';
 export { Greeks, type GreekRetrieveResponse, type GreekRetrieveParams } from './greeks';
 export { GreeksFlow, type GreeksFlowRetrieveResponse, type GreeksFlowRetrieveParams } from './greeks-flow';

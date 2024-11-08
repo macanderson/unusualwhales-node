@@ -9,6 +9,7 @@ export { Etf, type EtfListResponse } from './etf/etf';
 export { InsiderTrades, type InsiderTradeListResponse, type InsiderTradeListParams } from './insider-trades';
 export { Institutions, type InstitutionListResponse } from './institutions/institutions';
 export { Market } from './market/market';
+export { Options } from './options/options';
 export {
   OptionsFlows,
   type OptionsFlowRetrieveResponse,

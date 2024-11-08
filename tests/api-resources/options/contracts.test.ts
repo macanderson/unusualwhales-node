@@ -10,7 +10,7 @@ const client = new Unusualwhales({
 
 describe('resource contracts', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.optionsFlows.contracts.list({ symbol: 'symbol' });
+    const responsePromise = client.options.contracts.list({ symbol: 'symbol' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,7 @@ describe('resource contracts', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.optionsFlows.contracts.list({
+    const response = await client.options.contracts.list({
       symbol: 'symbol',
       expiration: '2019-12-27',
       optionType: 'CALL',
