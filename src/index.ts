@@ -186,25 +186,6 @@ export class Unusualwhales extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export {
-  UnusualwhalesError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} from './error';
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
 Unusualwhales.Analyst = Analyst;
 Unusualwhales.Calendar = Calendar;
 Unusualwhales.Congress = Congress;
@@ -220,7 +201,6 @@ Unusualwhales.Options = Options;
 Unusualwhales.Seasonality = Seasonality;
 Unusualwhales.Spike = Spike;
 Unusualwhales.Stocks = Stocks;
-
 export declare namespace Unusualwhales {
   export type RequestOptions = Core.RequestOptions;
 
@@ -262,5 +242,22 @@ export declare namespace Unusualwhales {
 
   export { Stocks as Stocks };
 }
+
+export { toFile, fileFromPath } from 'unusualwhales/uploads';
+export {
+  UnusualwhalesError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from 'unusualwhales/error';
 
 export default Unusualwhales;
