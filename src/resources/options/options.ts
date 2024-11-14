@@ -3,14 +3,14 @@
 import { APIResource } from '../../resource';
 import * as ChainAPI from './chain';
 import { Chain, ChainRetrieveParams, ChainRetrieveResponse } from './chain';
+import * as ContractAPI from './contract';
+import { Contract, ContractRetrieveResponse } from './contract';
 import * as ContractsAPI from './contracts';
-import { ContractListParams, ContractListResponse, ContractRetrieveResponse, Contracts } from './contracts';
+import { ContractListParams, ContractListResponse, Contracts } from './contracts';
 import * as ExpirationsAPI from './expirations';
 import { ExpirationRetrieveResponse, Expirations } from './expirations';
 import * as FlowAPI from './flow';
-import { Flow, FlowListParams, FlowListResponse } from './flow';
-import * as FlowBySymbolAPI from './flow-by-symbol';
-import { FlowBySymbol, FlowBySymbolRetrieveParams, FlowBySymbolRetrieveResponse } from './flow-by-symbol';
+import { Flow, FlowListParams, FlowListResponse, FlowRetrieveParams, FlowRetrieveResponse } from './flow';
 import * as GreeksAPI from './greeks';
 import { GreekRetrieveParams, GreekRetrieveResponse, Greeks } from './greeks';
 import * as HistoricalAPI from './historical';
@@ -18,16 +18,16 @@ import { Historical, HistoricalRetrieveParams, HistoricalRetrieveResponse } from
 import * as OiChangeAPI from './oi-change';
 import { OiChange, OiChangeRetrieveParams, OiChangeRetrieveResponse } from './oi-change';
 import * as TotalVolumeAPI from './total-volume';
-import { TotalVolume, TotalVolumeRetrieveParams, TotalVolumeRetrieveResponse } from './total-volume';
+import { TotalVolume, TotalVolumeListParams, TotalVolumeListResponse } from './total-volume';
 import * as GreekflowAPI from './greekflow/greekflow';
 import { Greekflow, GreekflowRetrieveParams, GreekflowRetrieveResponse } from './greekflow/greekflow';
 
 export class Options extends APIResource {
   chain: ChainAPI.Chain = new ChainAPI.Chain(this._client);
+  contract: ContractAPI.Contract = new ContractAPI.Contract(this._client);
   contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
   expirations: ExpirationsAPI.Expirations = new ExpirationsAPI.Expirations(this._client);
   flow: FlowAPI.Flow = new FlowAPI.Flow(this._client);
-  flowBySymbol: FlowBySymbolAPI.FlowBySymbol = new FlowBySymbolAPI.FlowBySymbol(this._client);
   greekflow: GreekflowAPI.Greekflow = new GreekflowAPI.Greekflow(this._client);
   greeks: GreeksAPI.Greeks = new GreeksAPI.Greeks(this._client);
   historical: HistoricalAPI.Historical = new HistoricalAPI.Historical(this._client);
@@ -36,10 +36,10 @@ export class Options extends APIResource {
 }
 
 Options.Chain = Chain;
+Options.Contract = Contract;
 Options.Contracts = Contracts;
 Options.Expirations = Expirations;
 Options.Flow = Flow;
-Options.FlowBySymbol = FlowBySymbol;
 Options.Greekflow = Greekflow;
 Options.Greeks = Greeks;
 Options.Historical = Historical;
@@ -53,21 +53,22 @@ export declare namespace Options {
     type ChainRetrieveParams as ChainRetrieveParams,
   };
 
+  export { Contract as Contract, type ContractRetrieveResponse as ContractRetrieveResponse };
+
   export {
     Contracts as Contracts,
-    type ContractRetrieveResponse as ContractRetrieveResponse,
     type ContractListResponse as ContractListResponse,
     type ContractListParams as ContractListParams,
   };
 
   export { Expirations as Expirations, type ExpirationRetrieveResponse as ExpirationRetrieveResponse };
 
-  export { Flow as Flow, type FlowListResponse as FlowListResponse, type FlowListParams as FlowListParams };
-
   export {
-    FlowBySymbol as FlowBySymbol,
-    type FlowBySymbolRetrieveResponse as FlowBySymbolRetrieveResponse,
-    type FlowBySymbolRetrieveParams as FlowBySymbolRetrieveParams,
+    Flow as Flow,
+    type FlowRetrieveResponse as FlowRetrieveResponse,
+    type FlowListResponse as FlowListResponse,
+    type FlowRetrieveParams as FlowRetrieveParams,
+    type FlowListParams as FlowListParams,
   };
 
   export {
@@ -96,7 +97,7 @@ export declare namespace Options {
 
   export {
     TotalVolume as TotalVolume,
-    type TotalVolumeRetrieveResponse as TotalVolumeRetrieveResponse,
-    type TotalVolumeRetrieveParams as TotalVolumeRetrieveParams,
+    type TotalVolumeListResponse as TotalVolumeListResponse,
+    type TotalVolumeListParams as TotalVolumeListParams,
   };
 }

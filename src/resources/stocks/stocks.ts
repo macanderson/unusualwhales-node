@@ -16,7 +16,13 @@ import { Price, PriceRetrieveResponse } from './price';
 import * as QuoteAPI from './quote';
 import { Quote, QuoteRetrieveResponse } from './quote';
 import * as ScreenerAPI from './screener';
-import { Screener, ScreenerListParams, ScreenerListResponse } from './screener';
+import {
+  Screener,
+  ScreenerCreateParams,
+  ScreenerCreateResponse,
+  ScreenerListParams,
+  ScreenerListResponse,
+} from './screener';
 
 export class Stocks extends APIResource {
   company: CompanyAPI.Company = new CompanyAPI.Company(this._client);
@@ -67,7 +73,9 @@ export declare namespace Stocks {
 
   export {
     Screener as Screener,
+    type ScreenerCreateResponse as ScreenerCreateResponse,
     type ScreenerListResponse as ScreenerListResponse,
+    type ScreenerCreateParams as ScreenerCreateParams,
     type ScreenerListParams as ScreenerListParams,
   };
 }

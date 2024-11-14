@@ -8,31 +8,31 @@ export class TotalVolume extends APIResource {
   /**
    * Retrieve total options volume for all symbols or a specific symbol.
    */
-  retrieve(
-    query?: TotalVolumeRetrieveParams,
+  list(
+    query?: TotalVolumeListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalVolumeRetrieveResponse>;
-  retrieve(options?: Core.RequestOptions): Core.APIPromise<TotalVolumeRetrieveResponse>;
-  retrieve(
-    query: TotalVolumeRetrieveParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TotalVolumeListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<TotalVolumeListResponse>;
+  list(
+    query: TotalVolumeListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalVolumeRetrieveResponse> {
+  ): Core.APIPromise<TotalVolumeListResponse> {
     if (isRequestOptions(query)) {
-      return this.retrieve({}, query);
+      return this.list({}, query);
     }
     return this._client.get('/options/total_volume', { query, ...options });
   }
 }
 
-export interface TotalVolumeRetrieveResponse {
+export interface TotalVolumeListResponse {
   date?: string;
 
-  symbols?: Array<TotalVolumeRetrieveResponse.Symbol>;
+  symbols?: Array<TotalVolumeListResponse.Symbol>;
 
   totalVolume?: number;
 }
 
-export namespace TotalVolumeRetrieveResponse {
+export namespace TotalVolumeListResponse {
   export interface Symbol {
     symbol?: string;
 
@@ -40,7 +40,7 @@ export namespace TotalVolumeRetrieveResponse {
   }
 }
 
-export interface TotalVolumeRetrieveParams {
+export interface TotalVolumeListParams {
   /**
    * Date to filter total options volume.
    */
@@ -54,7 +54,7 @@ export interface TotalVolumeRetrieveParams {
 
 export declare namespace TotalVolume {
   export {
-    type TotalVolumeRetrieveResponse as TotalVolumeRetrieveResponse,
-    type TotalVolumeRetrieveParams as TotalVolumeRetrieveParams,
+    type TotalVolumeListResponse as TotalVolumeListResponse,
+    type TotalVolumeListParams as TotalVolumeListParams,
   };
 }

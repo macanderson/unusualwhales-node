@@ -4,15 +4,18 @@
 
 This library provides convenient access to the Unusualwhales REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [docs.unusualwhales.com](https://docs.unusualwhales.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.tradesignals.io](https://docs.tradesignals.io). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Installation
 
 ```sh
-npm install unusualwhales
+npm install git+ssh://git@github.com:stainless-sdks/unusualwhales-node.git
 ```
+
+> [!NOTE]
+> Once this package is [published to npm](https://app.stainlessapi.com/docs/guides/publish), this will become: `npm install unusualwhales`
 
 ## Usage
 
@@ -23,13 +26,13 @@ The full API of this library can be found in [api.md](api.md).
 import Unusualwhales from 'unusualwhales';
 
 const client = new Unusualwhales({
-  apiKey: process.env['UNUSUALWHALES_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['API_KEY_AUTH'], // This is the default and can be omitted
 });
 
 async function main() {
-  const screener = await client.stocks.screener.list();
+  const overview = await client.market.overview.retrieve();
 
-  console.log(screener.data);
+  console.log(overview.indices);
 }
 
 main();
@@ -44,11 +47,11 @@ This library includes TypeScript definitions for all request params and response
 import Unusualwhales from 'unusualwhales';
 
 const client = new Unusualwhales({
-  apiKey: process.env['UNUSUALWHALES_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['API_KEY_AUTH'], // This is the default and can be omitted
 });
 
 async function main() {
-  const screener: Unusualwhales.Stocks.ScreenerListResponse = await client.stocks.screener.list();
+  const overview: Unusualwhales.Market.OverviewRetrieveResponse = await client.market.overview.retrieve();
 }
 
 main();
@@ -65,7 +68,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const screener = await client.stocks.screener.list().catch(async (err) => {
+  const overview = await client.market.overview.retrieve().catch(async (err) => {
     if (err instanceof Unusualwhales.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -108,7 +111,7 @@ const client = new Unusualwhales({
 });
 
 // Or, configure per-request:
-await client.stocks.screener.list({
+await client.market.overview.retrieve({
   maxRetries: 5,
 });
 ```
@@ -125,7 +128,7 @@ const client = new Unusualwhales({
 });
 
 // Override per-request:
-await client.stocks.screener.list({
+await client.market.overview.retrieve({
   timeout: 5 * 1000,
 });
 ```
@@ -146,13 +149,13 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Unusualwhales();
 
-const response = await client.stocks.screener.list().asResponse();
+const response = await client.market.overview.retrieve().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: screener, response: raw } = await client.stocks.screener.list().withResponse();
+const { data: overview, response: raw } = await client.market.overview.retrieve().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(screener.data);
+console.log(overview.indices);
 ```
 
 ### Making custom/undocumented requests
@@ -215,7 +218,7 @@ import Unusualwhales from 'unusualwhales';
 ```
 
 To do the inverse, add `import "unusualwhales/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/macanderson/unusualwhales-node/tree/main/src/_shims#readme)).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/stainless-sdks/unusualwhales-node/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
 
@@ -256,7 +259,7 @@ const client = new Unusualwhales({
 });
 
 // Override per-request:
-await client.stocks.screener.list({
+await client.market.overview.retrieve({
   httpAgent: new http.Agent({ keepAlive: false }),
 });
 ```
@@ -271,7 +274,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/macanderson/unusualwhales-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/unusualwhales-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

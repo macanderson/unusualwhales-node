@@ -88,6 +88,18 @@ Methods:
 - <code title="get /darkpool/transactions/{symbol}">client.darkpool.transactions.<a href="./src/resources/darkpool/transactions.ts">retrieve</a>(symbol, { ...params }) -> TransactionRetrieveResponse</code>
 - <code title="get /darkpool/transactions">client.darkpool.transactions.<a href="./src/resources/darkpool/transactions.ts">list</a>({ ...params }) -> TransactionListResponse</code>
 
+# Etf
+
+## Holdings
+
+Types:
+
+- <code><a href="./src/resources/etf/holdings.ts">HoldingListResponse</a></code>
+
+Methods:
+
+- <code title="get /etf/holdings">client.etf.holdings.<a href="./src/resources/etf/holdings.ts">list</a>({ ...params }) -> HoldingListResponse</code>
+
 # Etfs
 
 Types:
@@ -97,16 +109,6 @@ Types:
 Methods:
 
 - <code title="get /etf/list">client.etfs.<a href="./src/resources/etfs/etfs.ts">list</a>() -> EtfListResponse</code>
-
-## Holdings
-
-Types:
-
-- <code><a href="./src/resources/etfs/holdings.ts">HoldingListResponse</a></code>
-
-Methods:
-
-- <code title="get /etf/holdings">client.etfs.holdings.<a href="./src/resources/etfs/holdings.ts">list</a>({ ...params }) -> HoldingListResponse</code>
 
 ## Sectors
 
@@ -226,15 +228,15 @@ Methods:
 
 - <code title="get /market/sectors">client.market.sectors.<a href="./src/resources/market/sectors.ts">retrieve</a>({ ...params }) -> SectorRetrieveResponse</code>
 
-# News
+# FinancialNews
 
 Types:
 
-- <code><a href="./src/resources/news.ts">NewsRetrieveResponse</a></code>
+- <code><a href="./src/resources/financial-news.ts">FinancialNewRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="get /news">client.news.<a href="./src/resources/news.ts">retrieve</a>({ ...params }) -> NewsRetrieveResponse</code>
+- <code title="get /news">client.financialNews.<a href="./src/resources/financial-news.ts">retrieve</a>({ ...params }) -> FinancialNewRetrieveResponse</code>
 
 # Options
 
@@ -248,16 +250,24 @@ Methods:
 
 - <code title="get /options/chain/{symbol}">client.options.chain.<a href="./src/resources/options/chain.ts">retrieve</a>(symbol, { ...params }) -> ChainRetrieveResponse</code>
 
+## Contract
+
+Types:
+
+- <code><a href="./src/resources/options/contract.ts">ContractRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /options/contract/{optionSymbol}">client.options.contract.<a href="./src/resources/options/contract.ts">retrieve</a>(optionSymbol) -> ContractRetrieveResponse</code>
+
 ## Contracts
 
 Types:
 
-- <code><a href="./src/resources/options/contracts.ts">ContractRetrieveResponse</a></code>
 - <code><a href="./src/resources/options/contracts.ts">ContractListResponse</a></code>
 
 Methods:
 
-- <code title="get /options/contract/{optionSymbol}">client.options.contracts.<a href="./src/resources/options/contracts.ts">retrieve</a>(optionSymbol) -> ContractRetrieveResponse</code>
 - <code title="get /options/contracts">client.options.contracts.<a href="./src/resources/options/contracts.ts">list</a>({ ...params }) -> ContractListResponse</code>
 
 ## Expirations
@@ -274,21 +284,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/options/flow.ts">FlowRetrieveResponse</a></code>
 - <code><a href="./src/resources/options/flow.ts">FlowListResponse</a></code>
 
 Methods:
 
+- <code title="get /options/flow/{symbol}">client.options.flow.<a href="./src/resources/options/flow.ts">retrieve</a>(symbol, { ...params }) -> FlowRetrieveResponse</code>
 - <code title="get /options/flow">client.options.flow.<a href="./src/resources/options/flow.ts">list</a>({ ...params }) -> FlowListResponse</code>
-
-## FlowBySymbol
-
-Types:
-
-- <code><a href="./src/resources/options/flow-by-symbol.ts">FlowBySymbolRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /options/flow/{symbol}">client.options.flowBySymbol.<a href="./src/resources/options/flow-by-symbol.ts">retrieve</a>(symbol, { ...params }) -> FlowBySymbolRetrieveResponse</code>
 
 ## Greekflow
 
@@ -344,11 +346,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/options/total-volume.ts">TotalVolumeRetrieveResponse</a></code>
+- <code><a href="./src/resources/options/total-volume.ts">TotalVolumeListResponse</a></code>
 
 Methods:
 
-- <code title="get /options/total_volume">client.options.totalVolume.<a href="./src/resources/options/total-volume.ts">retrieve</a>({ ...params }) -> TotalVolumeRetrieveResponse</code>
+- <code title="get /options/total_volume">client.options.totalVolume.<a href="./src/resources/options/total-volume.ts">list</a>({ ...params }) -> TotalVolumeListResponse</code>
 
 # Seasonality
 
@@ -450,8 +452,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/stocks/screener.ts">ScreenerCreateResponse</a></code>
 - <code><a href="./src/resources/stocks/screener.ts">ScreenerListResponse</a></code>
 
 Methods:
 
-- <code title="post /stocks/screener">client.stocks.screener.<a href="./src/resources/stocks/screener.ts">list</a>({ ...params }) -> ScreenerListResponse</code>
+- <code title="post /stocks/screener">client.stocks.screener.<a href="./src/resources/stocks/screener.ts">create</a>({ ...params }) -> ScreenerCreateResponse</code>
+- <code title="get /stocks/screener">client.stocks.screener.<a href="./src/resources/stocks/screener.ts">list</a>({ ...params }) -> ScreenerListResponse</code>
