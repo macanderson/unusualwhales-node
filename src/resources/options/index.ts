@@ -2,7 +2,6 @@
 
 export { Chain, type ChainRetrieveResponse, type ChainRetrieveParams } from './chain';
 export { Contract, type ContractRetrieveResponse } from './contract';
-export { Contracts, type ContractListResponse, type ContractListParams } from './contracts';
 export { Expirations, type ExpirationRetrieveResponse } from './expirations';
 export {
   Flow,
@@ -15,5 +14,6 @@ export { Greekflow, type GreekflowRetrieveResponse, type GreekflowRetrieveParams
 export { Greeks, type GreekRetrieveResponse, type GreekRetrieveParams } from './greeks';
 export { Historical, type HistoricalRetrieveResponse, type HistoricalRetrieveParams } from './historical';
 export { OiChange, type OiChangeRetrieveResponse, type OiChangeRetrieveParams } from './oi-change';
+export { OptionChains, type OptionChainListResponse, type OptionChainListParams } from './option-chains';
 export { Options } from './options';
 export { TotalVolume, type TotalVolumeListResponse, type TotalVolumeListParams } from './total-volume';

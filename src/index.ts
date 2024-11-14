@@ -15,7 +15,6 @@ import { Analyst } from './resources/analyst/analyst';
 import { Calendar } from './resources/calendar/calendar';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
-import { Etf } from './resources/etf/etf';
 import { EtfListResponse, Etfs } from './resources/etfs/etfs';
 import { Insider } from './resources/insider/insider';
 import { Institutional } from './resources/institutional/institutional';
@@ -144,7 +143,6 @@ export class Unusualwhales extends Core.APIClient {
   congress: API.Congress = new API.Congress(this);
   correlations: API.Correlations = new API.Correlations(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
-  etf: API.Etf = new API.Etf(this);
   etfs: API.Etfs = new API.Etfs(this);
   insider: API.Insider = new API.Insider(this);
   institutional: API.Institutional = new API.Institutional(this);
@@ -197,7 +195,6 @@ Unusualwhales.Calendar = Calendar;
 Unusualwhales.Congress = Congress;
 Unusualwhales.Correlations = Correlations;
 Unusualwhales.Darkpool = Darkpool;
-Unusualwhales.Etf = Etf;
 Unusualwhales.Etfs = Etfs;
 Unusualwhales.Insider = Insider;
 Unusualwhales.Institutional = Institutional;
@@ -224,8 +221,6 @@ export declare namespace Unusualwhales {
   };
 
   export { Darkpool as Darkpool };
-
-  export { Etf as Etf };
 
   export { Etfs as Etfs, type EtfListResponse as EtfListResponse };
 

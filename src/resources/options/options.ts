@@ -5,8 +5,6 @@ import * as ChainAPI from './chain';
 import { Chain, ChainRetrieveParams, ChainRetrieveResponse } from './chain';
 import * as ContractAPI from './contract';
 import { Contract, ContractRetrieveResponse } from './contract';
-import * as ContractsAPI from './contracts';
-import { ContractListParams, ContractListResponse, Contracts } from './contracts';
 import * as ExpirationsAPI from './expirations';
 import { ExpirationRetrieveResponse, Expirations } from './expirations';
 import * as FlowAPI from './flow';
@@ -17,6 +15,8 @@ import * as HistoricalAPI from './historical';
 import { Historical, HistoricalRetrieveParams, HistoricalRetrieveResponse } from './historical';
 import * as OiChangeAPI from './oi-change';
 import { OiChange, OiChangeRetrieveParams, OiChangeRetrieveResponse } from './oi-change';
+import * as OptionChainsAPI from './option-chains';
+import { OptionChainListParams, OptionChainListResponse, OptionChains } from './option-chains';
 import * as TotalVolumeAPI from './total-volume';
 import { TotalVolume, TotalVolumeListParams, TotalVolumeListResponse } from './total-volume';
 import * as GreekflowAPI from './greekflow/greekflow';
@@ -25,7 +25,7 @@ import { Greekflow, GreekflowRetrieveParams, GreekflowRetrieveResponse } from '.
 export class Options extends APIResource {
   chain: ChainAPI.Chain = new ChainAPI.Chain(this._client);
   contract: ContractAPI.Contract = new ContractAPI.Contract(this._client);
-  contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
+  optionChains: OptionChainsAPI.OptionChains = new OptionChainsAPI.OptionChains(this._client);
   expirations: ExpirationsAPI.Expirations = new ExpirationsAPI.Expirations(this._client);
   flow: FlowAPI.Flow = new FlowAPI.Flow(this._client);
   greekflow: GreekflowAPI.Greekflow = new GreekflowAPI.Greekflow(this._client);
@@ -37,7 +37,7 @@ export class Options extends APIResource {
 
 Options.Chain = Chain;
 Options.Contract = Contract;
-Options.Contracts = Contracts;
+Options.OptionChains = OptionChains;
 Options.Expirations = Expirations;
 Options.Flow = Flow;
 Options.Greekflow = Greekflow;
@@ -56,9 +56,9 @@ export declare namespace Options {
   export { Contract as Contract, type ContractRetrieveResponse as ContractRetrieveResponse };
 
   export {
-    Contracts as Contracts,
-    type ContractListResponse as ContractListResponse,
-    type ContractListParams as ContractListParams,
+    OptionChains as OptionChains,
+    type OptionChainListResponse as OptionChainListResponse,
+    type OptionChainListParams as OptionChainListParams,
   };
 
   export { Expirations as Expirations, type ExpirationRetrieveResponse as ExpirationRetrieveResponse };
