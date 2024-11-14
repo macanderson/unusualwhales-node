@@ -161,6 +161,7 @@ export class Unusualwhales extends Core.APIClient {
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     return {
       ...super.defaultHeaders(opts),
+      Accept: '-application/json -text',
       ...this._options.defaultHeaders,
     };
   }
