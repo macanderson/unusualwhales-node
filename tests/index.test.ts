@@ -157,13 +157,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['UNUSUALWHALES_BASE_URL'] = ''; // empty
       const client = new Unusualwhales({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.unusualwhales.com');
+      expect(client.baseURL).toEqual('https://api.unusualwhales.com/v1');
     });
 
     test('blank env variable', () => {
       process.env['UNUSUALWHALES_BASE_URL'] = '  '; // blank
       const client = new Unusualwhales({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.unusualwhales.com');
+      expect(client.baseURL).toEqual('https://api.unusualwhales.com/v1');
     });
   });
 
