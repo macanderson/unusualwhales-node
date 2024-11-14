@@ -8,31 +8,31 @@ export class TotalVolume extends APIResource {
   /**
    * Retrieve total options volume for all symbols or a specific symbol.
    */
-  list(
-    query?: TotalVolumeListParams,
+  retrieve(
+    query?: TotalVolumeRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalVolumeListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<TotalVolumeListResponse>;
-  list(
-    query: TotalVolumeListParams | Core.RequestOptions = {},
+  ): Core.APIPromise<TotalVolumeRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<TotalVolumeRetrieveResponse>;
+  retrieve(
+    query: TotalVolumeRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalVolumeListResponse> {
+  ): Core.APIPromise<TotalVolumeRetrieveResponse> {
     if (isRequestOptions(query)) {
-      return this.list({}, query);
+      return this.retrieve({}, query);
     }
     return this._client.get('/options/total_volume', { query, ...options });
   }
 }
 
-export interface TotalVolumeListResponse {
+export interface TotalVolumeRetrieveResponse {
   date?: string;
 
-  symbols?: Array<TotalVolumeListResponse.Symbol>;
+  symbols?: Array<TotalVolumeRetrieveResponse.Symbol>;
 
   totalVolume?: number;
 }
 
-export namespace TotalVolumeListResponse {
+export namespace TotalVolumeRetrieveResponse {
   export interface Symbol {
     symbol?: string;
 
@@ -40,7 +40,7 @@ export namespace TotalVolumeListResponse {
   }
 }
 
-export interface TotalVolumeListParams {
+export interface TotalVolumeRetrieveParams {
   /**
    * Date to filter total options volume.
    */
@@ -54,7 +54,7 @@ export interface TotalVolumeListParams {
 
 export declare namespace TotalVolume {
   export {
-    type TotalVolumeListResponse as TotalVolumeListResponse,
-    type TotalVolumeListParams as TotalVolumeListParams,
+    type TotalVolumeRetrieveResponse as TotalVolumeRetrieveResponse,
+    type TotalVolumeRetrieveParams as TotalVolumeRetrieveParams,
   };
 }

@@ -20,7 +20,7 @@ or products provided by Unusualwhales please follow the respective company's sec
 
 ### Unusualwhales Terms and Policies
 
-Please contact dev-feedback@tradesignals.io for any questions or concerns regarding security of our services.
+Please contact dev-feedback@unusualwhales.com for any questions or concerns regarding security of our services.
 
 ---
 

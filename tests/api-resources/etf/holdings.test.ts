@@ -10,7 +10,7 @@ const client = new Unusualwhales({
 
 describe('resource holdings', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.etfs.holdings.list({ etf: 'etf' });
+    const responsePromise = client.etf.holdings.list({ etf: 'etf' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,6 +21,6 @@ describe('resource holdings', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.etfs.holdings.list({ etf: 'etf', date: '2019-12-27' });
+    const response = await client.etf.holdings.list({ etf: 'etf', date: '2019-12-27' });
   });
 });

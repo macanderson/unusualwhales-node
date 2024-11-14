@@ -1,22 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import * as Core from '../../core';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as Core from '../core';
 
-export class Trades extends APIResource {
+export class InsiderTrades extends APIResource {
   /**
    * Retrieve data on insider buys and sells.
    */
   retrieve(
-    query?: TradeRetrieveParams,
+    query?: InsiderTradeRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TradeRetrieveResponse>;
-  retrieve(options?: Core.RequestOptions): Core.APIPromise<TradeRetrieveResponse>;
+  ): Core.APIPromise<InsiderTradeRetrieveResponse>;
+  retrieve(options?: Core.RequestOptions): Core.APIPromise<InsiderTradeRetrieveResponse>;
   retrieve(
-    query: TradeRetrieveParams | Core.RequestOptions = {},
+    query: InsiderTradeRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TradeRetrieveResponse> {
+  ): Core.APIPromise<InsiderTradeRetrieveResponse> {
     if (isRequestOptions(query)) {
       return this.retrieve({}, query);
     }
@@ -24,11 +24,11 @@ export class Trades extends APIResource {
   }
 }
 
-export interface TradeRetrieveResponse {
-  trades?: Array<TradeRetrieveResponse.Trade>;
+export interface InsiderTradeRetrieveResponse {
+  trades?: Array<InsiderTradeRetrieveResponse.Trade>;
 }
 
-export namespace TradeRetrieveResponse {
+export namespace InsiderTradeRetrieveResponse {
   export interface Trade {
     date?: string;
 
@@ -44,7 +44,7 @@ export namespace TradeRetrieveResponse {
   }
 }
 
-export interface TradeRetrieveParams {
+export interface InsiderTradeRetrieveParams {
   /**
    * Date to filter insider trades.
    */
@@ -66,9 +66,9 @@ export interface TradeRetrieveParams {
   transactionType?: 'Buy' | 'Sell';
 }
 
-export declare namespace Trades {
+export declare namespace InsiderTrades {
   export {
-    type TradeRetrieveResponse as TradeRetrieveResponse,
-    type TradeRetrieveParams as TradeRetrieveParams,
+    type InsiderTradeRetrieveResponse as InsiderTradeRetrieveResponse,
+    type InsiderTradeRetrieveParams as InsiderTradeRetrieveParams,
   };
 }

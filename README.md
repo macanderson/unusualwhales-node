@@ -4,15 +4,18 @@
 
 This library provides convenient access to the Unusualwhales REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [docs.tradesignals.io](https://docs.tradesignals.io). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.unusualwhales.com](https://docs.unusualwhales.com). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Installation
 
 ```sh
-npm install unusualwhales
+npm install git+ssh://git@github.com:stainless-sdks/unusualwhales-node.git
 ```
+
+> [!NOTE]
+> Once this package is [published to npm](https://app.stainlessapi.com/docs/guides/publish), this will become: `npm install unusualwhales`
 
 ## Usage
 
@@ -23,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Unusualwhales from 'unusualwhales';
 
 const client = new Unusualwhales({
-  apiKey: process.env['API_KEY_AUTH'], // This is the default and can be omitted
+  apiKey: process.env['UNUSUALWHALES_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
@@ -44,7 +47,7 @@ This library includes TypeScript definitions for all request params and response
 import Unusualwhales from 'unusualwhales';
 
 const client = new Unusualwhales({
-  apiKey: process.env['API_KEY_AUTH'], // This is the default and can be omitted
+  apiKey: process.env['UNUSUALWHALES_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
@@ -134,20 +137,6 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
-## Default Headers
-
-We automatically send the `Accept` header set to `-application/json -text`.
-
-If you need to, you can override it by setting default headers on a per-request basis.
-
-```ts
-import Unusualwhales from 'unusualwhales';
-
-const client = new Unusualwhales();
-
-const overview = await client.market.overview.retrieve({ headers: { Accept: 'My-Custom-Value' } });
-```
-
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
@@ -229,7 +218,7 @@ import Unusualwhales from 'unusualwhales';
 ```
 
 To do the inverse, add `import "unusualwhales/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/macanderson/unusualwhales-node/tree/main/src/_shims#readme)).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/stainless-sdks/unusualwhales-node/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
 
@@ -285,7 +274,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/macanderson/unusualwhales-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/unusualwhales-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

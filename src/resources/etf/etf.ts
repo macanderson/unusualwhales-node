@@ -9,7 +9,7 @@ import { SectorListResponse, SectorRetrieveParams, SectorRetrieveResponse, Secto
 import * as TideAPI from './tide';
 import { Tide, TideRetrieveParams, TideRetrieveResponse } from './tide';
 
-export class Etfs extends APIResource {
+export class Etf extends APIResource {
   sectors: SectorsAPI.Sectors = new SectorsAPI.Sectors(this._client);
   tide: TideAPI.Tide = new TideAPI.Tide(this._client);
   holdings: HoldingsAPI.Holdings = new HoldingsAPI.Holdings(this._client);
@@ -26,11 +26,11 @@ export interface EtfListResponse {
   etfs?: Array<string>;
 }
 
-Etfs.Sectors = Sectors;
-Etfs.Tide = Tide;
-Etfs.Holdings = Holdings;
+Etf.Sectors = Sectors;
+Etf.Tide = Tide;
+Etf.Holdings = Holdings;
 
-export declare namespace Etfs {
+export declare namespace Etf {
   export { type EtfListResponse as EtfListResponse };
 
   export {

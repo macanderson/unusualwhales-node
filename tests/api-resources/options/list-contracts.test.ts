@@ -8,9 +8,9 @@ const client = new Unusualwhales({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource optionChains', () => {
+describe('resource listContracts', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.options.optionChains.list({ symbol: 'symbol' });
+    const responsePromise = client.options.listContracts.list({ symbol: 'symbol' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,7 @@ describe('resource optionChains', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.options.optionChains.list({
+    const response = await client.options.listContracts.list({
       symbol: 'symbol',
       expiration: '2019-12-27',
       optionType: 'CALL',
