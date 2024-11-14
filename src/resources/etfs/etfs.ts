@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as HoldingsAPI from './holdings';
+import { HoldingListParams, HoldingListResponse, Holdings } from './holdings';
 import * as SectorsAPI from './sectors';
 import { SectorListResponse, SectorRetrieveParams, SectorRetrieveResponse, Sectors } from './sectors';
 import * as TideAPI from './tide';
@@ -10,6 +12,7 @@ import { Tide, TideRetrieveParams, TideRetrieveResponse } from './tide';
 export class Etfs extends APIResource {
   sectors: SectorsAPI.Sectors = new SectorsAPI.Sectors(this._client);
   tide: TideAPI.Tide = new TideAPI.Tide(this._client);
+  holdings: HoldingsAPI.Holdings = new HoldingsAPI.Holdings(this._client);
 
   /**
    * Retrieve a list of ETFs available.
@@ -25,6 +28,7 @@ export interface EtfListResponse {
 
 Etfs.Sectors = Sectors;
 Etfs.Tide = Tide;
+Etfs.Holdings = Holdings;
 
 export declare namespace Etfs {
   export { type EtfListResponse as EtfListResponse };
@@ -40,5 +44,11 @@ export declare namespace Etfs {
     Tide as Tide,
     type TideRetrieveResponse as TideRetrieveResponse,
     type TideRetrieveParams as TideRetrieveParams,
+  };
+
+  export {
+    Holdings as Holdings,
+    type HoldingListResponse as HoldingListResponse,
+    type HoldingListParams as HoldingListParams,
   };
 }

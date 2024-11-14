@@ -88,18 +88,6 @@ Methods:
 - <code title="get /darkpool/transactions/{symbol}">client.darkpool.transactions.<a href="./src/resources/darkpool/transactions.ts">retrieve</a>(symbol, { ...params }) -> TransactionRetrieveResponse</code>
 - <code title="get /darkpool/transactions">client.darkpool.transactions.<a href="./src/resources/darkpool/transactions.ts">list</a>({ ...params }) -> TransactionListResponse</code>
 
-# Etf
-
-## Holdings
-
-Types:
-
-- <code><a href="./src/resources/etf/holdings.ts">HoldingListResponse</a></code>
-
-Methods:
-
-- <code title="get /etf/holdings">client.etf.holdings.<a href="./src/resources/etf/holdings.ts">list</a>({ ...params }) -> HoldingListResponse</code>
-
 # Etfs
 
 Types:
@@ -131,6 +119,16 @@ Types:
 Methods:
 
 - <code title="get /etf/tide">client.etfs.tide.<a href="./src/resources/etfs/tide.ts">retrieve</a>({ ...params }) -> TideRetrieveResponse</code>
+
+## Holdings
+
+Types:
+
+- <code><a href="./src/resources/etfs/holdings.ts">HoldingListResponse</a></code>
+
+Methods:
+
+- <code title="get /etf/holdings">client.etfs.holdings.<a href="./src/resources/etfs/holdings.ts">list</a>({ ...params }) -> HoldingListResponse</code>
 
 # Insider
 
@@ -260,15 +258,15 @@ Methods:
 
 - <code title="get /options/contract/{optionSymbol}">client.options.contract.<a href="./src/resources/options/contract.ts">retrieve</a>(optionSymbol) -> ContractRetrieveResponse</code>
 
-## Contracts
+## OptionChains
 
 Types:
 
-- <code><a href="./src/resources/options/contracts.ts">ContractListResponse</a></code>
+- <code><a href="./src/resources/options/option-chains.ts">OptionChainListResponse</a></code>
 
 Methods:
 
-- <code title="get /options/contracts">client.options.contracts.<a href="./src/resources/options/contracts.ts">list</a>({ ...params }) -> ContractListResponse</code>
+- <code title="get /options/contracts">client.options.optionChains.<a href="./src/resources/options/option-chains.ts">list</a>({ ...params }) -> OptionChainListResponse</code>
 
 ## Expirations
 

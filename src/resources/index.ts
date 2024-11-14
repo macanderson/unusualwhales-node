@@ -5,7 +5,6 @@ export { Calendar } from './calendar/calendar';
 export { Congress } from './congress/congress';
 export { Correlations, type CorrelationListResponse, type CorrelationListParams } from './correlations';
 export { Darkpool } from './darkpool/darkpool';
-export { Etf } from './etf/etf';
 export { Etfs, type EtfListResponse } from './etfs/etfs';
 export {
   FinancialNews,
