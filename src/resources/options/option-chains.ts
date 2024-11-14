@@ -3,20 +3,23 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 
-export class Contracts extends APIResource {
+export class OptionChains extends APIResource {
   /**
    * Retrieve a list of option contracts based on specified filters.
    */
-  list(query: ContractListParams, options?: Core.RequestOptions): Core.APIPromise<ContractListResponse> {
+  list(
+    query: OptionChainListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OptionChainListResponse> {
     return this._client.get('/options/contracts', { query, ...options });
   }
 }
 
-export interface ContractListResponse {
-  contracts?: Array<ContractListResponse.Contract>;
+export interface OptionChainListResponse {
+  contracts?: Array<OptionChainListResponse.Contract>;
 }
 
-export namespace ContractListResponse {
+export namespace OptionChainListResponse {
   export interface Contract {
     ask?: number;
 
@@ -40,7 +43,7 @@ export namespace ContractListResponse {
   }
 }
 
-export interface ContractListParams {
+export interface OptionChainListParams {
   /**
    * Stock symbol to filter option contracts.
    */
@@ -62,6 +65,9 @@ export interface ContractListParams {
   strike?: number;
 }
 
-export declare namespace Contracts {
-  export { type ContractListResponse as ContractListResponse, type ContractListParams as ContractListParams };
+export declare namespace OptionChains {
+  export {
+    type OptionChainListResponse as OptionChainListResponse,
+    type OptionChainListParams as OptionChainListParams,
+  };
 }
