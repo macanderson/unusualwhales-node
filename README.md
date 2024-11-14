@@ -134,6 +134,20 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Default Headers
+
+We automatically send the `Accept` header set to `-application/json -text`.
+
+If you need to, you can override it by setting default headers on a per-request basis.
+
+```ts
+import Unusualwhales from 'unusualwhales';
+
+const client = new Unusualwhales();
+
+const overview = await client.market.overview.retrieve({ headers: { Accept: 'My-Custom-Value' } });
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
