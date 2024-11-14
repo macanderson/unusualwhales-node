@@ -9,6 +9,31 @@ const client = new Unusualwhales({
 });
 
 describe('resource flow', () => {
+  test('retrieve', async () => {
+    const responsePromise = client.options.flow.retrieve('symbol');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('retrieve: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.options.flow.retrieve('symbol', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Unusualwhales.NotFoundError);
+  });
+
+  test('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.options.flow.retrieve('symbol', { date: '2019-12-27' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Unusualwhales.NotFoundError);
+  });
+
   test('list', async () => {
     const responsePromise = client.options.flow.list();
     const rawResponse = await responsePromise.asResponse();

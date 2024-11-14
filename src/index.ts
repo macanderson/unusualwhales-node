@@ -6,11 +6,16 @@ import * as Errors from './error';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
 import { CorrelationListParams, CorrelationListResponse, Correlations } from './resources/correlations';
-import { News, NewsRetrieveParams, NewsRetrieveResponse } from './resources/news';
+import {
+  FinancialNewRetrieveParams,
+  FinancialNewRetrieveResponse,
+  FinancialNews,
+} from './resources/financial-news';
 import { Analyst } from './resources/analyst/analyst';
 import { Calendar } from './resources/calendar/calendar';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
+import { Etf } from './resources/etf/etf';
 import { EtfListResponse, Etfs } from './resources/etfs/etfs';
 import { Insider } from './resources/insider/insider';
 import { Institutional } from './resources/institutional/institutional';
@@ -23,7 +28,7 @@ import { Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
   /**
-   * Your authorization token for accessing the UnusualWhales API.
+   * API key used for authentication in the UnusualWhales API
    */
   apiKey?: string | undefined;
 
@@ -95,7 +100,7 @@ export class Unusualwhales extends Core.APIClient {
   /**
    * API Client for interfacing with the Unusualwhales API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['UNUSUALWHALES_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['API_KEY_AUTH'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['UNUSUALWHALES_BASE_URL'] ?? https://api.unusualwhales.com/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -106,12 +111,12 @@ export class Unusualwhales extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('UNUSUALWHALES_BASE_URL'),
-    apiKey = Core.readEnv('UNUSUALWHALES_API_KEY'),
+    apiKey = Core.readEnv('API_KEY_AUTH'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.UnusualwhalesError(
-        "The UNUSUALWHALES_API_KEY environment variable is missing or empty; either provide it, or instantiate the Unusualwhales client with an apiKey option, like new Unusualwhales({ apiKey: 'My API Key' }).",
+        "The API_KEY_AUTH environment variable is missing or empty; either provide it, or instantiate the Unusualwhales client with an apiKey option, like new Unusualwhales({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -139,12 +144,13 @@ export class Unusualwhales extends Core.APIClient {
   congress: API.Congress = new API.Congress(this);
   correlations: API.Correlations = new API.Correlations(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
+  etf: API.Etf = new API.Etf(this);
   etfs: API.Etfs = new API.Etfs(this);
   insider: API.Insider = new API.Insider(this);
   institutional: API.Institutional = new API.Institutional(this);
   institutions: API.Institutions = new API.Institutions(this);
   market: API.Market = new API.Market(this);
-  news: API.News = new API.News(this);
+  financialNews: API.FinancialNews = new API.FinancialNews(this);
   options: API.Options = new API.Options(this);
   seasonality: API.Seasonality = new API.Seasonality(this);
   spike: API.Spike = new API.Spike(this);
@@ -191,12 +197,13 @@ Unusualwhales.Calendar = Calendar;
 Unusualwhales.Congress = Congress;
 Unusualwhales.Correlations = Correlations;
 Unusualwhales.Darkpool = Darkpool;
+Unusualwhales.Etf = Etf;
 Unusualwhales.Etfs = Etfs;
 Unusualwhales.Insider = Insider;
 Unusualwhales.Institutional = Institutional;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Market = Market;
-Unusualwhales.News = News;
+Unusualwhales.FinancialNews = FinancialNews;
 Unusualwhales.Options = Options;
 Unusualwhales.Seasonality = Seasonality;
 Unusualwhales.Spike = Spike;
@@ -218,6 +225,8 @@ export declare namespace Unusualwhales {
 
   export { Darkpool as Darkpool };
 
+  export { Etf as Etf };
+
   export { Etfs as Etfs, type EtfListResponse as EtfListResponse };
 
   export { Insider as Insider };
@@ -229,9 +238,9 @@ export declare namespace Unusualwhales {
   export { Market as Market };
 
   export {
-    News as News,
-    type NewsRetrieveResponse as NewsRetrieveResponse,
-    type NewsRetrieveParams as NewsRetrieveParams,
+    FinancialNews as FinancialNews,
+    type FinancialNewRetrieveResponse as FinancialNewRetrieveResponse,
+    type FinancialNewRetrieveParams as FinancialNewRetrieveParams,
   };
 
   export { Options as Options };
