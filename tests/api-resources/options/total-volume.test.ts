@@ -9,8 +9,8 @@ const client = new Unusualwhales({
 });
 
 describe('resource totalVolume', () => {
-  test('list', async () => {
-    const responsePromise = client.options.totalVolume.list();
+  test('retrieve', async () => {
+    const responsePromise = client.options.totalVolume.retrieve();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,17 +20,17 @@ describe('resource totalVolume', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.options.totalVolume.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.options.totalVolume.retrieve({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
 
-  test('list: request options and params are passed correctly', async () => {
+  test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.options.totalVolume.list(
+      client.options.totalVolume.retrieve(
         { date: '2019-12-27', symbol: 'symbol' },
         { path: '/_stainless_unknown_path' },
       ),

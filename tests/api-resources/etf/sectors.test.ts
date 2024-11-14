@@ -8,9 +8,9 @@ const client = new Unusualwhales({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tide', () => {
+describe('resource sectors', () => {
   test('retrieve', async () => {
-    const responsePromise = client.etfs.tide.retrieve();
+    const responsePromise = client.etf.sectors.retrieve();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource tide', () => {
 
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.etfs.tide.retrieve({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.etf.sectors.retrieve({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Unusualwhales.NotFoundError,
     );
   });
@@ -30,7 +30,28 @@ describe('resource tide', () => {
   test('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.etfs.tide.retrieve({ date: '2019-12-27', etf: 'etf' }, { path: '/_stainless_unknown_path' }),
+      client.etf.sectors.retrieve(
+        { date: '2019-12-27', sector: 'sector' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Unusualwhales.NotFoundError);
+  });
+
+  test('list', async () => {
+    const responsePromise = client.etf.sectors.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.etf.sectors.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Unusualwhales.NotFoundError,
+    );
   });
 });

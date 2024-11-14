@@ -10,7 +10,7 @@ import { News, NewsRetrieveParams, NewsRetrieveResponse } from './news';
 import * as OverviewAPI from './overview';
 import { Overview, OverviewRetrieveResponse } from './overview';
 import * as SectorsAPI from './sectors';
-import { SectorRetrieveParams, SectorRetrieveResponse, Sectors } from './sectors';
+import { SectorListParams, SectorListResponse, Sectors } from './sectors';
 
 export class Market extends APIResource {
   indices: IndicesAPI.Indices = new IndicesAPI.Indices(this._client);
@@ -45,7 +45,7 @@ export declare namespace Market {
 
   export {
     Sectors as Sectors,
-    type SectorRetrieveResponse as SectorRetrieveResponse,
-    type SectorRetrieveParams as SectorRetrieveParams,
+    type SectorListResponse as SectorListResponse,
+    type SectorListParams as SectorListParams,
   };
 }

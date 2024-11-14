@@ -7,17 +7,21 @@ import * as Uploads from './uploads';
 import * as API from './resources/index';
 import { CorrelationListParams, CorrelationListResponse, Correlations } from './resources/correlations';
 import {
-  FinancialNewRetrieveParams,
-  FinancialNewRetrieveResponse,
-  FinancialNews,
-} from './resources/financial-news';
+  InsiderTradeRetrieveParams,
+  InsiderTradeRetrieveResponse,
+  InsiderTrades,
+} from './resources/insider-trades';
+import {
+  InstitutionalActivity,
+  InstitutionalActivityRetrieveParams,
+  InstitutionalActivityRetrieveResponse,
+} from './resources/institutional-activity';
+import { News, NewsRetrieveParams, NewsRetrieveResponse } from './resources/news';
 import { Analyst } from './resources/analyst/analyst';
 import { Calendar } from './resources/calendar/calendar';
 import { Congress } from './resources/congress/congress';
 import { Darkpool } from './resources/darkpool/darkpool';
-import { EtfListResponse, Etfs } from './resources/etfs/etfs';
-import { Insider } from './resources/insider/insider';
-import { Institutional } from './resources/institutional/institutional';
+import { Etf, EtfListResponse } from './resources/etf/etf';
 import { InstitutionListResponse, Institutions } from './resources/institutions/institutions';
 import { Market } from './resources/market/market';
 import { Options } from './resources/options/options';
@@ -27,7 +31,7 @@ import { Stocks } from './resources/stocks/stocks';
 
 export interface ClientOptions {
   /**
-   * API key used for authentication in the UnusualWhales API
+   * API key used for authenticating requests to the UnusualWhales API.
    */
   apiKey?: string | undefined;
 
@@ -99,7 +103,7 @@ export class Unusualwhales extends Core.APIClient {
   /**
    * API Client for interfacing with the Unusualwhales API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['API_KEY_AUTH'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['UNUSUALWHALES_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['UNUSUALWHALES_BASE_URL'] ?? https://api.unusualwhales.com/api] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -110,12 +114,12 @@ export class Unusualwhales extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('UNUSUALWHALES_BASE_URL'),
-    apiKey = Core.readEnv('API_KEY_AUTH'),
+    apiKey = Core.readEnv('UNUSUALWHALES_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.UnusualwhalesError(
-        "The API_KEY_AUTH environment variable is missing or empty; either provide it, or instantiate the Unusualwhales client with an apiKey option, like new Unusualwhales({ apiKey: 'My API Key' }).",
+        "The UNUSUALWHALES_API_KEY environment variable is missing or empty; either provide it, or instantiate the Unusualwhales client with an apiKey option, like new Unusualwhales({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -143,12 +147,12 @@ export class Unusualwhales extends Core.APIClient {
   congress: API.Congress = new API.Congress(this);
   correlations: API.Correlations = new API.Correlations(this);
   darkpool: API.Darkpool = new API.Darkpool(this);
-  etfs: API.Etfs = new API.Etfs(this);
-  insider: API.Insider = new API.Insider(this);
-  institutional: API.Institutional = new API.Institutional(this);
+  etf: API.Etf = new API.Etf(this);
+  insiderTrades: API.InsiderTrades = new API.InsiderTrades(this);
+  institutionalActivity: API.InstitutionalActivity = new API.InstitutionalActivity(this);
   institutions: API.Institutions = new API.Institutions(this);
   market: API.Market = new API.Market(this);
-  financialNews: API.FinancialNews = new API.FinancialNews(this);
+  news: API.News = new API.News(this);
   options: API.Options = new API.Options(this);
   seasonality: API.Seasonality = new API.Seasonality(this);
   spike: API.Spike = new API.Spike(this);
@@ -161,7 +165,6 @@ export class Unusualwhales extends Core.APIClient {
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     return {
       ...super.defaultHeaders(opts),
-      Accept: '-application/json -text',
       ...this._options.defaultHeaders,
     };
   }
@@ -196,12 +199,12 @@ Unusualwhales.Calendar = Calendar;
 Unusualwhales.Congress = Congress;
 Unusualwhales.Correlations = Correlations;
 Unusualwhales.Darkpool = Darkpool;
-Unusualwhales.Etfs = Etfs;
-Unusualwhales.Insider = Insider;
-Unusualwhales.Institutional = Institutional;
+Unusualwhales.Etf = Etf;
+Unusualwhales.InsiderTrades = InsiderTrades;
+Unusualwhales.InstitutionalActivity = InstitutionalActivity;
 Unusualwhales.Institutions = Institutions;
 Unusualwhales.Market = Market;
-Unusualwhales.FinancialNews = FinancialNews;
+Unusualwhales.News = News;
 Unusualwhales.Options = Options;
 Unusualwhales.Seasonality = Seasonality;
 Unusualwhales.Spike = Spike;
@@ -223,20 +226,28 @@ export declare namespace Unusualwhales {
 
   export { Darkpool as Darkpool };
 
-  export { Etfs as Etfs, type EtfListResponse as EtfListResponse };
+  export { Etf as Etf, type EtfListResponse as EtfListResponse };
 
-  export { Insider as Insider };
+  export {
+    InsiderTrades as InsiderTrades,
+    type InsiderTradeRetrieveResponse as InsiderTradeRetrieveResponse,
+    type InsiderTradeRetrieveParams as InsiderTradeRetrieveParams,
+  };
 
-  export { Institutional as Institutional };
+  export {
+    InstitutionalActivity as InstitutionalActivity,
+    type InstitutionalActivityRetrieveResponse as InstitutionalActivityRetrieveResponse,
+    type InstitutionalActivityRetrieveParams as InstitutionalActivityRetrieveParams,
+  };
 
   export { Institutions as Institutions, type InstitutionListResponse as InstitutionListResponse };
 
   export { Market as Market };
 
   export {
-    FinancialNews as FinancialNews,
-    type FinancialNewRetrieveResponse as FinancialNewRetrieveResponse,
-    type FinancialNewRetrieveParams as FinancialNewRetrieveParams,
+    News as News,
+    type NewsRetrieveResponse as NewsRetrieveResponse,
+    type NewsRetrieveParams as NewsRetrieveParams,
   };
 
   export { Options as Options };
