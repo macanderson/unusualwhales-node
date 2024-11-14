@@ -100,7 +100,7 @@ export class Unusualwhales extends Core.APIClient {
    * API Client for interfacing with the Unusualwhales API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['API_KEY_AUTH'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['UNUSUALWHALES_BASE_URL'] ?? https://api.unusualwhales.com/v1] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['UNUSUALWHALES_BASE_URL'] ?? https://api.unusualwhales.com/api] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -122,7 +122,7 @@ export class Unusualwhales extends Core.APIClient {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.unusualwhales.com/v1`,
+      baseURL: baseURL || `https://api.unusualwhales.com/api`,
     };
 
     super({
